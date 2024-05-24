@@ -1,0 +1,21 @@
+body {
+  background-image: url("https://wallpapercave.com/wp/wp2578580.jpg");
+}
+
+/* On smaller resolutions, hide the text for Large screens */
+@media only screen and (max-width: 576px) {
+  .largeScreen {
+    display: none;
+  }
+}
+
+/* On larger resolutions, hide the text for Small screens */
+@media only screen and (min-width: 576px) {
+  .smallScreen {
+    display: none;
+  }
+}
+
+.error {
+  color: red;
+}
