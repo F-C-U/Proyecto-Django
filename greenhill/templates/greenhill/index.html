@@ -2,7 +2,6 @@
 {% load static %}
 {% block imports %}
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
-  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}
 {% block contenido %}
   <h1>Bienvenido a Green hill Zone tu portal de Videojuegos</h1>
@@ -211,4 +210,8 @@
     </div>
   </div>
   <!-- Tabla de productos -->
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}
