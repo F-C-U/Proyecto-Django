@@ -8,9 +8,10 @@
   <div class="row p-2">
     <div class="col"></div>
     <div class="col bg-dark">
+      {% load crispy_forms_tags %}
       <form action="admin-agregar-producto.html" id="formProducto" method="post">
         {% csrf_token %}
-        {{form}}
+        {{ form | crispy }}
         <div class="float-end">
           <button type="submit" class="btn btn-primary" id="btnAgregar">Agregar</button>
         </div>
