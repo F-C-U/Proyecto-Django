@@ -1,176 +1,50 @@
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+{% extends 'greenhill/base.html' %}
+{% load static %}
+{% block imports %}
+  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
+{% endblock %}
 
-<head>
-    <!--Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!--Bootstrap-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar producto</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <!-- Barra de navegacion -->
-    <div class="largeScreen">
-        <nav class="navbar navbar-expand-sm bg-dark  nav-fill">
-            <div class="container">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                Catalogo
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="catalogo.html">Todo el catalogo</a></li>
-                                <li><a class="dropdown-item" href="xbox.html">Xbox</a></li>
-                                <li><a class="dropdown-item" href="playstation.html">Playstation</a></li>
-                                <li><a class="dropdown-item" href="nintendo.html">Nintendo Switch</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                Administracion
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="admin-productos.html"">Productos</a></li>
-                            <li><a class=" dropdown-item" href="admin-agregar-producto.html">Agregar producto</a>
-                                </li>
-                                <li><a class=" dropdown-item" href="admin-usuarios.html">Usuarios</a></li>
-                                <li><a class=" dropdown-item" href="admin-pedidos.html">Pedidos</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="container justify-content-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="historial.html">Mis compras</a></li>
-                    <li class="nav-item"><a class="nav-link" href="carritodecompras.html">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="registrarse.html">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Barra de navegacion -->
-
-    <!-- Barra de navegacion pantallas pequeñas -->
-    <div class="smallScreen">
-        <nav class="navbar navbar-expand-sm bg-dark">
-            <div class="container-fluid row">
-                <ul class="navbar-nav">
-                    <div class="d-flex justify-content-between">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html"><img src="img/home.png">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside">
-                                    <img src="img/menu.png">
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="iniciar-sesion.html">Iniciar sesion</a></li>
-                                    <li><a class="dropdown-item" href="registrarse.html">Registrarse</a></li>
-                                    <li><a class="dropdown-item" href="perfil.html">Perfil</a></li>
-                                    <li><a class="dropdown-item" href="historial.html">Mis compras</a></li>
-                                    <li><a class="dropdown-item" href="carritodecompras.html">Carrito</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                                Catalogo
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="catalogo.html">Todo el catalogo</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="xbox.html">Xbox</a></li>
-                                                <li><a class="dropdown-item" href="playstation.html">Playstation</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="nintendo.html">Nintendo Switch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="dropdown">
-                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                                Administracion
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="admin-productos.html"">Productos</a></li>
-                                            <li><a class=" dropdown-item" href="admin-usuarios.html">Usuarios</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="admin-agregar-producto.html">Agregar
-                                                        producto</a></li>
-                                                <li><a class=" dropdown-item" href="admin-pedidos.html">Pedidos</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </div>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Barra de navegacion pantallas pequeñas -->
-    <div class="row p-2">
-
-        <div class="col"></div>
-        <div class="col bg-dark">
-            <form action="admin-agregar-producto.html" id="formProducto">
-                <div class="mb-3 mt-3">
-                    <label class="form-label" for="nombreproducto">Nombre del producto</label>
-                    <input type="text" class="form-control" id="nombreproducto" placeholder="Producto"
-                        name="nombreproducto">
-                </div>
-                <div class="mb-3 mt-3">
-                    <label class="form-label" for="foto">Foto</label>
-                    <input type="file" class="form-control" id="foto" placeholder="Producto" name="foto">
-                </div>
-                <div class="mb-3 mt-3">
-                    <label class="form-label">Precio</label>
-                    <input type="text" class="form-control" id="precio" placeholder="$15.990" name="precio">
-                </div>
-                <div class="mb-3 mt-3">
-                    <label class="form-label">Consola</label>
-                    <select class="form-select" id="consola" name="consola">
-                        <option value="0">--Seleccione--</option>
-                        <option value="xbox">Xbox</option>
-                        <option value="playstation">Playstation</option>
-                        <option value="nintendo switch">Nintendo Switch</option>
-                    </select>
-                </div>
-                <div class="float-end">
-                    <button type="submit" class="btn btn-primary" id="btnAgregar">
-                        Agregar
-                    </button>
-                </div>
-            </form>
+{% block contenido %}
+  <div class="row p-2">
+    <div class="col"></div>
+    <div class="col bg-dark">
+      <form action="admin-agregar-producto.html" id="formProducto">
+        <div class="mb-3 mt-3">
+          <label class="form-label" for="nombreproducto">Nombre del producto</label>
+          <input type="text" class="form-control" id="nombreproducto" placeholder="Producto" name="nombreproducto" />
         </div>
-        <div class="col"></div>
+        <div class="mb-3 mt-3">
+          <label class="form-label" for="foto">Foto</label>
+          <input type="file" class="form-control" id="foto" placeholder="Producto" name="foto" />
+        </div>
+        <div class="mb-3 mt-3">
+          <label class="form-label">Precio</label>
+          <input type="text" class="form-control" id="precio" placeholder="$15.990" name="precio" />
+        </div>
+        <div class="mb-3 mt-3">
+          <label class="form-label">Consola</label>
+          <select class="form-select" id="consola" name="consola">
+            <option value="0">--Seleccione--</option>
+            <option value="xbox">Xbox</option>
+            <option value="playstation">Playstation</option>
+            <option value="nintendo switch">Nintendo Switch</option>
+          </select>
+        </div>
+        <div class="float-end">
+          <button type="submit" class="btn btn-primary" id="btnAgregar">Agregar</button>
+        </div>
+      </form>
     </div>
+    <div class="col"></div>
+  </div>
+{% endblock %}
 
-</body>
-<!-- scripts -->
-<script src="js/jquery-3.7.1.min.js"></script>
-<script src="js/jquery.validate.js"></script>
-<script src="js/messages_es.js"></script>
-<script src="js/validacionProducto.js"></script>
-<!-- scripts -->
-
-</html>
+{% block scripts %}
+  <!-- scripts -->
+  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'greenhill/js/jquery-3.7.1.min.js' %}"></script>
+  <script src="{% static 'greenhill/js/jquery.validate.js' %}"></script>
+  <script src="{% static 'greenhill/js/messages_es.js' %}"></script>
+  <script src="{% static 'greenhill/js/validacionProducto.js' %}"></script>
+  <!-- scripts -->
+{% endblock %}
