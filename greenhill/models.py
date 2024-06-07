@@ -17,8 +17,8 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField()
     stock = models.IntegerField()
-    imagen = models.ImageField(upload_to='productos', null=True)
-    consola = models.Choices()
+    imagen = models.ImageField(null=True)
+    consola = models.CharField(choices=[('Xbox', 'Xbox'), ('Playstation', 'Playstation'), ('Nintendo Switch', 'Nintendo Switch')], max_length=50)
 
 class Pedido(models.Model):
     fecha = models.DateField()

@@ -1,8 +1,5 @@
 from django.contrib import admin
-
+from .models import *
 # Register your models here.
-class AdminPersona(admin.ModelAdmin):
-    list_display = []
-    search_fields = []
-    list_filter = []
-    list_per_page = 10
+admin.site.register(Persona)
+admin.site.register(Producto)

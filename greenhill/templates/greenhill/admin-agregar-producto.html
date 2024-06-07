@@ -8,28 +8,9 @@
   <div class="row p-2">
     <div class="col"></div>
     <div class="col bg-dark">
-      <form action="admin-agregar-producto.html" id="formProducto">
-        <div class="mb-3 mt-3">
-          <label class="form-label" for="nombreproducto">Nombre del producto</label>
-          <input type="text" class="form-control" id="nombreproducto" placeholder="Producto" name="nombreproducto" />
-        </div>
-        <div class="mb-3 mt-3">
-          <label class="form-label" for="foto">Foto</label>
-          <input type="file" class="form-control" id="foto" placeholder="Producto" name="foto" />
-        </div>
-        <div class="mb-3 mt-3">
-          <label class="form-label">Precio</label>
-          <input type="text" class="form-control" id="precio" placeholder="$15.990" name="precio" />
-        </div>
-        <div class="mb-3 mt-3">
-          <label class="form-label">Consola</label>
-          <select class="form-select" id="consola" name="consola">
-            <option value="0">--Seleccione--</option>
-            <option value="xbox">Xbox</option>
-            <option value="playstation">Playstation</option>
-            <option value="nintendo switch">Nintendo Switch</option>
-          </select>
-        </div>
+      <form action="admin-agregar-producto.html" id="formProducto" method="post">
+        {% csrf_token %}
+        {{form}}
         <div class="float-end">
           <button type="submit" class="btn btn-primary" id="btnAgregar">Agregar</button>
         </div>
