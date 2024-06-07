@@ -18,6 +18,7 @@ class Producto(models.Model):
     precio = models.IntegerField()
     stock = models.IntegerField()
     imagen = models.ImageField(upload_to='productos', null=True)
+    consola = models.Choices()
 
 class Pedido(models.Model):
     fecha = models.DateField()
