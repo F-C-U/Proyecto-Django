@@ -11,9 +11,10 @@
       {% load crispy_forms_tags %}
       <form action="admin-agregar-producto.html" id="formProducto" method="post">
         {% csrf_token %}
-        {{ form | crispy }}
+        {{ form|crispy }}
+        {{ field.errors }}
         <div class="float-end">
-          <button type="submit" class="btn btn-primary" id="btnAgregar">Agregar</button>
+          <button type="submit" class="btn btn-primary">Agregar</button>
         </div>
       </form>
     </div>
