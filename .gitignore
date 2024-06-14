@@ -3,3 +3,4 @@ greenhill/__pycache__
 greenhill/migrations/__pycache__
 greenhill/media/*
 db.sqlite3
+.vscode
