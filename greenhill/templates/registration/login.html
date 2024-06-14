@@ -1,0 +1,36 @@
+{% extends 'greenhill/base.html' %}
+{% load static %}
+{% block imports %}
+  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
+{% endblock %}
+{% block contenido %}
+  <title>Iniciar sesion</title>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <form class="pt-5" id="formSesion" name="formSesion" method="post" enctype="multipart/form-data">
+          {% load crispy_forms_tags %}
+          {% csrf_token %}
+          {{ form|crispy }}
+          <div class="container">
+            <button type="submit" class="btn btn-success float-end">Iniciar sesion</button>
+          </div>
+          <div class="container">
+            <a href="reset-contraseña.html">¿Olvidaste tu contraseña?</a>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+  </div>
+{% endblock %}
+<!-- Scripts -->
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/messages_es.js"></script>
+<script src="js/validacionSesion.js"></script>
+<!-- Scripts -->
+{% block Scripts %}
+  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
