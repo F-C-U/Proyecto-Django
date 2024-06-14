@@ -12,7 +12,7 @@
   <div class="container">
     <div class="row">
       <!-- BEGIN SEARCH RESULT -->
-      <div class="col-md-12">
+      <div class="col">
         <div class="grid search">
           <div class="grid-body">
             <div class="row">
@@ -54,94 +54,33 @@
                 <!-- END FILTER BY PRICE -->
               </div>
               <!-- Tabla de productos -->
-              <div class="col">
-                <div class="row">
-                  <div class="col">
-                    <a href="producto.html">
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th>
-                              <img class="mx-auto d-block" src="img/placeholder.png" alt="" />
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">Producto</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">Precio</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </a>
-                  </div>
-                  <div class="col">
-                    <a href="producto.html">
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th>
-                              <img class="mx-auto d-block" src="img/placeholder.png" alt="" />
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">Producto</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">Precio</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </a>
-                  </div>
-                  <div class="col">
-                    <a href="producto.html">
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th>
-                              <img class="mx-auto d-block" src="img/placeholder.png" alt="" />
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">Producto</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">Precio</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </a>
-                  </div>
-                  <div class="col">
-                    <a href="producto.html">
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th>
-                              <img class="mx-auto d-block" src="img/placeholder.png" alt="" />
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">Producto</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">Precio</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </a>
+              {% for p in productos %}
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <a href="{% url "producto" p.id %}">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>
+                                <img class="mx-auto d-block" src="{{ p.imagen.url }}" alt="" height="100" />
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center">{{ p.nombre }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center">{{ p.precio }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              {% endfor %}
               <!-- Tabla de productos -->
             </div>
           </div>
