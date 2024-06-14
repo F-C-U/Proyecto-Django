@@ -5,29 +5,49 @@
 {% endblock %}
 
 {% block contenido %}
-  <div class="row p-2">
-    <div class="col"></div>
-    <div class="col bg-dark">
-      {% load crispy_forms_tags %}
-      <form action="admin-agregar-producto.html" id="formProducto" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        {{ field.errors }}
-        <div class="float-end">
-          <button type="submit" class="btn btn-primary">Agregar</button>
-        </div>
-      </form>
+  <div class="container px-5 mt-4">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        {% load crispy_forms_tags %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|crispy }}
+          {{ field.errors }}
+          <div class="float-end">
+            <input type="submit" value="Agregar producto" class="btn btn-success" />
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-3"></div>
     </div>
-    <div class="col"></div>
   </div>
 {% endblock %}
 
 {% block scripts %}
   <!-- scripts -->
-  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+  {% comment %} <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'greenhill/js/jquery-3.7.1.min.js' %}"></script>
   <script src="{% static 'greenhill/js/jquery.validate.js' %}"></script>
   <script src="{% static 'greenhill/js/messages_es.js' %}"></script>
-  <script src="{% static 'greenhill/js/validacionProducto.js' %}"></script>
+  <script src="{% static 'greenhill/js/validacionProducto.js' %}"></script> {% endcomment %}
   <!-- scripts -->
 {% endblock %}
+
+<div class="container px-5 mt-4">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <div class="mt-4 p-2 border rounded">
+        <h3 class="text-center mt-3">Crear Persona</h3>
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <div>
+            <input type="submit" value="Crear Persona" class="btn btn-success" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

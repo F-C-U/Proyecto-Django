@@ -11,7 +11,8 @@ def adminAgregar(request):
     if request.method == "POST":
         form = ProductoForm(request.POST,files=request.FILES)
         if form.is_valid():
-            return HttpResponseRedirect("greenhill/index.html")
+            form.save()
+            return HttpResponseRedirect('admin-agregar')
     else:
         form = ProductoForm()
     datos = {

@@ -1,3 +1,5 @@
-sitio/__pycache__/
-greenhill/__pycache__/
-greenhill/migrations/__pycache__/
+sitio/__pycache__
+greenhill/__pycache__
+greenhill/migrations/__pycache__
+greenhill/media/*
+db.sqlite3
