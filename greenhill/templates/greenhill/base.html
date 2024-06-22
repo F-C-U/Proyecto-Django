@@ -31,15 +31,17 @@
             <li class="nav-item">
               <a class="nav-link active" href="{% url 'catalogo' %}" aria-current="page">Catalogo</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administracion</a>
-              <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="{% url 'admin-productos' %}">Productos</a>
-                <a class="dropdown-item" href="{% url 'admin-agregar' %}">Agregar producto</a>
-                <a class="dropdown-item" href="{% url 'index' %}">Usuarios</a>
-                <a class="dropdown-item" href="{% url 'index' %}">Pedidos</a>
-              </div>
-            </li>
+            {% if user.is_authenticated and user.is_staff %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administracion</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                  <a class="dropdown-item" href="{% url 'admin-productos' %}">Productos</a>
+                  <a class="dropdown-item" href="{% url 'admin-agregar' %}">Agregar producto</a>
+                  <a class="dropdown-item" href="{% url 'index' %}">Usuarios</a>
+                  <a class="dropdown-item" href="{% url 'index' %}">Pedidos</a>
+                </div>
+              </li>
+            {% endif %}
           </ul>
           <form class="d-flex my-2 my-lg-0">
             <input class="form-control me-sm-2 bg-primary" type="text" placeholder="Buscar" />
@@ -63,17 +65,17 @@
                   <button class="nav-link" type="submit">Cerrar sesion</button>
                 </form>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="perfil.html">Perfil</a>
+              </li>
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="registrarse.html">Registrarse</a>
+              </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="registrarse.html">Registrarse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="perfil.html">Perfil</a>
-            </li>
           </ul>
         </div>
       </nav>

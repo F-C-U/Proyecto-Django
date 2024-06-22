@@ -1,203 +1,77 @@
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
-
-<head>
-    <!--Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!--Bootstrap-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-</head>
-
-<body>
-    <!-- Barra de navegacion -->
-    <div class="largeScreen">
-        <nav class="navbar navbar-expand-sm bg-dark  nav-fill">
-            <div class="container">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                Catalogo
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="catalogo.html">Todo el catalogo</a></li>
-                                <li><a class="dropdown-item" href="xbox.html">Xbox</a></li>
-                                <li><a class="dropdown-item" href="playstation.html">Playstation</a></li>
-                                <li><a class="dropdown-item" href="nintendo.html">Nintendo Switch</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                Administracion
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="admin-productos.html"">Productos</a></li>
-                                <li><a class=" dropdown-item" href="admin-agregar-producto.html">Agregar producto</a>
-                                </li>
-                                <li><a class=" dropdown-item" href="admin-usuarios.html">Usuarios</a></li>
-                                <li><a class=" dropdown-item" href="admin-pedidos.html">Pedidos</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="container justify-content-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="historial.html">Mis compras</a></li>
-                    <li class="nav-item"><a class="nav-link" href="carritodecompras.html">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="registrarse.html">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Barra de navegacion -->
-
-    <!-- Barra de navegacion pantallas pequeñas -->
-    <div class="smallScreen">
-        <nav class="navbar navbar-expand-sm bg-dark">
-            <div class="container-fluid row">
-                <ul class="navbar-nav">
-                    <div class="d-flex justify-content-between">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html"><img src="img/home.png">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside">
-                                    <img src="img/menu.png">
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="iniciar-sesion.html">Iniciar sesion</a></li>
-                                    <li><a class="dropdown-item" href="registrarse.html">Registrarse</a></li>
-                                    <li><a class="dropdown-item" href="perfil.html">Perfil</a></li>
-                                    <li><a class="dropdown-item" href="historial.html">Mis compras</a></li>
-                                    <li><a class="dropdown-item" href="carritodecompras.html">Carrito</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                                Catalogo
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="catalogo.html">Todo el catalogo</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="xbox.html">Xbox</a></li>
-                                                <li><a class="dropdown-item" href="playstation.html">Playstation</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="nintendo.html">Nintendo Switch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="dropdown">
-                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                                Administracion
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="admin-productos.html"">Productos</a></li>
-                                                <li><a class=" dropdown-item" href="admin-usuarios.html">Usuarios</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="admin-agregar-producto.html">Agregar
-                                                        producto</a></li>
-                                                <li><a class=" dropdown-item" href="admin-pedidos.html">Pedidos</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </div>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Barra de navegacion pantallas pequeñas -->
-    <!-- Formulario registro -->
-    <div class="row mt-3 animate__animated animate__fadeInUp">
-        <div class="col-md p-md-2"></div>
-        <div class="col-md p-md-8 m-s-3 bg-dark">
-            <form action="index.html" method="get" id="formRegistro">
-                <div class="form-group">
-                    <label class="form-label" for="rut">Rut:</label>
-                    <input id="rut" type="text" class="form-control" name="rut">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="nombre">Nombre:</label>
-                    <input id="nombre" type="text" class="form-control" name="nombre">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="apellido">Apellido:</label>
-                    <input id="apellido" type="text" class="form-control" name="apellido">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="email">Correo:</label>
-                    <input type="email" class="form-control" id="email" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="telefono" class="form-label">Teléfono:</label>
-                    <input type="telefono" class="form-control" id="telefono" name="telefono">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="region">Region:</label>
-                    <select class="form-select" id="region" name="region">
-                        <option value="0">--Region--</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="comuna" class="form-label">Ciudad:</label>
-                    <select class="form-select" id="comuna" name="comuna">
-                        <option value="0">--Comuna--</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="direccion">Direccion:</label>
-                    <input class="form-control" id="direccion" name="direccion">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="pass1">Contraseña:</label>
-                    <input type="password" class="form-control" id="pass1" name="pass1">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="pass2">Confirmar contraseña:</label>
-                    <input type="password" class="form-control" id="pass2" name="pass2">
-                </div>
-                <div class="container mb-3 mt-3">
-                    <button id="btnRegistro" type="submit" class="btn btn-primary float-end">Registrarse</button>
-                </div>
-                <div class="container">
-                    <a href="iniciar-sesion.html">¿Ya tienes una cuenta?</a>
-                </div>
-            </form>
+{% extends 'greenhill/base.html' %}
+{% load static %}
+{% block imports %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+{% endblock %}
+{% block contenido %}
+  <!-- Formulario registro -->
+  <div class="row mt-3 animate__animated animate__fadeInUp">
+    <div class="col-md p-md-2"></div>
+    <div class="col-md p-md-8 m-s-3 bg-dark">
+      <form action="index.html" method="get" id="formRegistro">
+        <div class="form-group">
+          <label class="form-label" for="rut">Rut:</label>
+          <input id="rut" type="text" class="form-control" name="rut" />
         </div>
-        <div class="col-md p-md-2"></div>
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre:</label>
+          <input id="nombre" type="text" class="form-control" name="nombre" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="apellido">Apellido:</label>
+          <input id="apellido" type="text" class="form-control" name="apellido" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Correo:</label>
+          <input type="email" class="form-control" id="email" name="email" />
+        </div>
+        <div class="form-group">
+          <label for="telefono" class="form-label">Teléfono:</label>
+          <input type="telefono" class="form-control" id="telefono" name="telefono" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="region">Region:</label>
+          <select class="form-select" id="region" name="region">
+            <option value="0">--Region--</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="comuna" class="form-label">Ciudad:</label>
+          <select class="form-select" id="comuna" name="comuna">
+            <option value="0">--Comuna--</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="direccion">Direccion:</label>
+          <input class="form-control" id="direccion" name="direccion" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="pass1">Contraseña:</label>
+          <input type="password" class="form-control" id="pass1" name="pass1" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="pass2">Confirmar contraseña:</label>
+          <input type="password" class="form-control" id="pass2" name="pass2" />
+        </div>
+        <div class="container mb-3 mt-3">
+          <button id="btnRegistro" type="submit" class="btn btn-primary float-end">Registrarse</button>
+        </div>
+        <div class="container">
+          <a href="iniciar-sesion.html">¿Ya tienes una cuenta?</a>
+        </div>
+      </form>
     </div>
-    <!-- Formulario registro -->
+    <div class="col-md p-md-2"></div>
+  </div>
+  <!-- Formulario registro -->
+{% endblock %}
+<!-- Scripts -->
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/validacionesRegistro.js"></script>
+<script src="js/rellenarSelect.js"></script>
+<script src="js/messages_es.js"></script>
+<!-- Scripts -->
+{% block scripts %}
 
-    <!--Scripts-->
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <script src="js/jquery.validate.js"></script>
-    <script src="js/validacionesRegistro.js"></script>
-    <script src="js/rellenarSelect.js"></script>
-    <script src="js/messages_es.js"></script>
-    <!--Scripts-->
-</body>
-
-</html>
+{% endblock %}

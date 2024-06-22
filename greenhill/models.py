@@ -1,13 +1,14 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Persona(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     rut = models.CharField(max_length=13)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     correo = models.EmailField()
-    telefono = models.IntegerField()
+    telefono = models.IntegerField(max_length=9)
     direccion = models.CharField(max_length=100)
     pass1 = models.CharField(max_length=16)
     pass2 = models.CharField(max_length=16)
