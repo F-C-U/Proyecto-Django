@@ -1,6 +1,6 @@
 sitio/__pycache__
 greenhill/__pycache__
-greenhill/migrations/__pycache__
+greenhill/migrations
 greenhill/media/*
 db.sqlite3
 .vscode
