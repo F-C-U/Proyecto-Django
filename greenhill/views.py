@@ -1,5 +1,6 @@
+import re
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import * 
 from .models import *
 
@@ -43,22 +44,19 @@ def paginaProductos(request):
     return render(request,'greenhill/admin-productos.html',datos)
 
 def editarProductos(request,id):
+    producto = get_object_or_404(Producto, id=id)
+    data ={
+        'form': ProductoForm(instance=producto)
+    }
     if request.method == 'POST':
-        producto = get_object_or_404(Producto, id=id)
-        producto.nombre = request.POST.get('nombre')
-        producto.precio = request.POST.get('precio')
-        producto.description = request.POST.get('descripcion')
-        producto.stock = request.POST.get('stock')
-        producto.imagen = request.FILES.get('imagen')
-        producto.save()
-        return JsonResponse({'status': 'success'})
-
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+        formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to='admin-productos')
+        data["form"] = formulario
+    return render(request, 'greenhill/admin-modificar-producto.html', data)
 
 def eliminarProductos(request, id):
-    if request.method == 'POST':
-        producto = get_object_or_404(Producto, id=id)
-        producto.delete()
-        return JsonResponse({'status': 'success'})
-
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+    producto=get_object_or_404(Producto, id=id)
+    producto.delete()
+    return redirect(to='admin-productos')

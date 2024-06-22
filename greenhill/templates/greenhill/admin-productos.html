@@ -51,8 +51,8 @@
                             <td class="text-nowrap align-middle text-center">{{ p.precio }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="editProduct({{ p.id }})">Editar</button>
-                                <button class="btn btn-sm btn-outline-secondary badge" type="button" onclick="eliminarProducto({{ p.id }})"><i class="fa fa-trash"></i></button>
+                                <a class="btn btn-primary" href="{% url 'editar-producto' p.id %}">Editar</a>
+                                <a class="btn btn-sm btn-outline-secondary badge" href="{% url 'eliminar-producto' p.id %}"><i class="fa fa-trash"></i></a>
                               </div>
                             </td>
                           </tr>
@@ -96,57 +96,6 @@
       </div>
     </div>
   </div>
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-          <form method="post" enctype="multipart/form-data" id="formEditar" name="formEditar">
-            <div class="mb-3 mt-3">
-              <label class="form-label" for="nombre">Nombre del producto</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" />
-            </div>
-
-            <div class="mb-3 mt-3">
-              <label class="form-label" for="precio">Precio</label>
-              <input type="text" class="form-control" id="precio" placeholder="$15.990" name="precio" />
-            </div>
-            <div class="mb-3 mt-3">
-              <label class="form-label" for="descripcion">Descripcion</label>
-              <input type="text" class="form-control" id="descripcion" name="descripcion" />
-            </div>
-            <div class="mb-3 mt-3">
-              <label class="form-label" for="imagen">Imagen</label>
-              <input type="file" class="form-control" id="imagen" name="imagen" />
-            </div>
-            <div class="mb-3 mt-3">
-              <label class="form-label" for="stock">Stock</label>
-              <input type="text" class="form-control" id="stock" name="stock" />
-            </div>
-            {% comment %} <div class="mb-3 mt-3">
-              <label class="form-label" for="consola">Consola</label>
-              <select class="form-select" id="consola" name="consola">
-                <option value="0">--Consola--</option>
-                <option>Xbox</option>
-                <option>Playstation</option>
-                <option>Nintendo Switch</option>
-              </select>
-            </div> {% endcomment %}
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-success">Guardar</button>
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 {% endblock %}
 <!-- Scripts -->
 <script src="js/jquery.validate.js"></script>
@@ -156,69 +105,4 @@
 {% block scripts %}
   <script src="{% static 'greenhill/js/jquery-3.7.1.min.js' %}"></script>
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
-  <script>
-    function editProduct(id) {
-      // Fetch the product details and populate the form
-      $.ajax({
-        url: '/editar-producto/' + id + '/',
-        type: 'GET',
-        success: function (data) {
-          $('#nombre').val(data.nombre)
-          $('#precio').val(data.precio)
-          $('#descripcion').val(data.descripcion)
-          $('#imagen').val(data.imagen)
-          $('#stock').val(data.stock)
-          // Handle other fields as needed
-    
-          // Show the modal for editing
-          $('#myModal').modal('show')
-        },
-        error: function () {
-          alert('Error al cargar los detalles del producto')
-        }
-      })
-    }
-    
-    $('#formEditar').submit(function (event) {
-      event.preventDefault()
-      var id = $('#idProducto').val()
-    
-      $.ajax({
-        url: '/editar-producto/' + id + '/',
-        type: 'POST',
-        data: new FormData(this),
-        processData: false,
-        contentType: false,
-        success: function (data) {
-          if (data.status === 'success') {
-            // Update the product details in the table
-            location.reload() // Reload the page to reflect changes
-          } else {
-            alert('Error al guardar el producto')
-          }
-        },
-        error: function () {
-          alert('Error al guardar el producto')
-        }
-      })
-    })
-    
-    function eliminarProducto(id) {
-      $.ajax({
-        url: '/eliminar-producto/' + id + '/',
-        type: 'POST',
-        headers: {
-          'X-CSRFToken': '{{ csrf_token }}'
-        },
-        success: function (data) {
-          if (data.status == 'success') {
-            $('#product-' + id).remove()
-            location.reload()
-          } else {
-            alert('Error al eliminar el producto')
-          }
-        }
-      })
-    }
-  </script>
 {% endblock %}

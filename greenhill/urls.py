@@ -9,7 +9,7 @@ urlpatterns = [
     path('producto/<id>',producto,name='producto'),
     path('eliminar-producto/<int:id>/', eliminarProductos, name='eliminar-producto'),
     path('editar-producto/<int:id>/', editarProductos, name='editar-producto'),
-    path('admin-productos', paginaProductos, name='admin-productos'),
+    path('admin-productos/', paginaProductos, name='admin-productos'),
 ]
 
 if settings.DEBUG:
