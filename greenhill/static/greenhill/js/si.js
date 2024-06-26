@@ -12,8 +12,9 @@ $(document).ready(function () {
     });
 
     $('#id_region').change(function () {
+        console.log("xd");
         var regionSeleccionada = $(this).val();
-        var selectComunas = $("#comuna");
+        var selectComunas = $("#id_comuna");
         selectComunas.empty();
         if (regionSeleccionada != "0") {
             var comunas = dataJSON.regiones.find(r => r.region === regionSeleccionada).comunas;

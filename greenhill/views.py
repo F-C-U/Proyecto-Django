@@ -60,3 +60,36 @@ def eliminarProductos(request, id):
     producto=get_object_or_404(Producto, id=id)
     producto.delete()
     return redirect(to='admin-productos')
+
+def perfil(request):
+    return render(request,'greenhill/perfil.html')
+
+def pago(request):
+    return render(request,'greenhill/pago.html')
+
+def usuarios(request):
+    usuarios = Persona.objects.all()
+    datos = {
+        "usuarios": usuarios
+    }
+    return render(request, "greenhill/admin-usuarios.html", datos)
+
+def eliminarUsuario(request, id):
+    usuario = get_object_or_404(Persona, id=id)
+    usuario.delete()
+    return redirect(to='usuarios')
+
+def registro(request):
+    form= PersonaForm()
+    if request.method == "POST":
+        form = PersonaForm(request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('admin-agregar')
+    else:
+        form = PersonaForm()
+    datos = {
+        "form": form
+    }
+    
+    return render(request,'greenhill/registrarse.html',datos)

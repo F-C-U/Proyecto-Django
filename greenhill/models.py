@@ -8,10 +8,15 @@ class Persona(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     correo = models.EmailField()
-    telefono = models.IntegerField(max_length=9)
+    telefono = models.IntegerField()
+    region = models.CharField(max_length=200,null=True)
+    comuna = models.CharField(max_length=200,null=True)
     direccion = models.CharField(max_length=100)
     pass1 = models.CharField(max_length=16)
     pass2 = models.CharField(max_length=16)
+    def __str__(self):
+        return f"{self.nombre} - {self.apellido}"
+    
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=50)

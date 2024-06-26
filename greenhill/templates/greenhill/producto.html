@@ -12,7 +12,7 @@
       <thead>
         <tr>
           <th>
-            <img class="mx-auto d-block" src="{{ producto.imagen.url }}" alt="" height="100"/>
+            <img class="mx-auto d-block" src="{{ producto.imagen.url }}" alt="" height="100" />
           </th>
         </tr>
       </thead>
@@ -28,8 +28,10 @@
   </div>
   <!-- producto -->
   <div class="container">
-    <a class="btn bg-white text-black" href="pago.html">Comprar</a>
-    <a class="btn bg-white text-black float-end" href="#">Agregar al Carrito</a>
+    {% if producto.stock != 0 %}
+      <a class="btn bg-white text-black" href="{% url 'pago' %}">Comprar</a>
+      <a class="btn bg-white text-black float-end" href="#">Agregar al Carrito</a>
+    {% endif %}
   </div>
 {% endblock %}
 {% block scripts %}

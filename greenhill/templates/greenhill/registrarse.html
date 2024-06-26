@@ -1,7 +1,9 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block imports %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
 {% block contenido %}
   <!-- Formulario registro -->
@@ -9,56 +11,8 @@
     <div class="col-md p-md-2"></div>
     <div class="col-md p-md-8 m-s-3 bg-dark">
       <form action="index.html" method="get" id="formRegistro">
-        <div class="form-group">
-          <label class="form-label" for="rut">Rut:</label>
-          <input id="rut" type="text" class="form-control" name="rut" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="nombre">Nombre:</label>
-          <input id="nombre" type="text" class="form-control" name="nombre" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="apellido">Apellido:</label>
-          <input id="apellido" type="text" class="form-control" name="apellido" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="email">Correo:</label>
-          <input type="email" class="form-control" id="email" name="email" />
-        </div>
-        <div class="form-group">
-          <label for="telefono" class="form-label">Teléfono:</label>
-          <input type="telefono" class="form-control" id="telefono" name="telefono" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="region">Region:</label>
-          <select class="form-select" id="region" name="region">
-            <option value="0">--Region--</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="comuna" class="form-label">Ciudad:</label>
-          <select class="form-select" id="comuna" name="comuna">
-            <option value="0">--Comuna--</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="direccion">Direccion:</label>
-          <input class="form-control" id="direccion" name="direccion" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="pass1">Contraseña:</label>
-          <input type="password" class="form-control" id="pass1" name="pass1" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="pass2">Confirmar contraseña:</label>
-          <input type="password" class="form-control" id="pass2" name="pass2" />
-        </div>
-        <div class="container mb-3 mt-3">
-          <button id="btnRegistro" type="submit" class="btn btn-primary float-end">Registrarse</button>
-        </div>
-        <div class="container">
-          <a href="iniciar-sesion.html">¿Ya tienes una cuenta?</a>
-        </div>
+        {% csrf_token %}
+        {{ form|crispy }}
       </form>
     </div>
     <div class="col-md p-md-2"></div>
@@ -66,12 +20,14 @@
   <!-- Formulario registro -->
 {% endblock %}
 <!-- Scripts -->
-<script src="js/jquery-3.7.1.min.js"></script>
 <script src="js/jquery.validate.js"></script>
 <script src="js/validacionesRegistro.js"></script>
 <script src="js/rellenarSelect.js"></script>
 <script src="js/messages_es.js"></script>
 <!-- Scripts -->
 {% block scripts %}
-
+  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'greenhill/js/jquery-3.7.1.min.js' %}"></script>
+  <script src="{% static 'greenhill/js/rellenarSelect.js' %}"></script>
+  <script src="{% static 'greenhill/js/si.js' %}"></script>
 {% endblock %}
