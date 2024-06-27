@@ -1,0 +1,129 @@
+{% extends 'greenhill/base.html' %}
+{% load static %}
+{% block imports %}
+  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
+{% endblock %}
+{% block contenido %}
+  <div class="container mt-2">
+    <div class="contentbar">
+      <!-- Start row -->
+      <div class="row">
+        <!-- Start col -->
+        <div class="col-md-12 col-lg-12 col-xl-12">
+          <div class="card m-b-30">
+            <div class="card-header">
+              <h5 class="card-title text-center">Carrito</h5>
+            </div>
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                  <div class="cart-container">
+                    <div class="cart-head">
+                      <div class="table-responsive">
+                        <table class="table table-borderless">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Accion</th>
+                              <th scope="col"></th>
+                              <th scope="col">Producto</th>
+                              <th scope="col">Cantidad</th>
+                              <th scope="col">Precio</th>
+                              <th scope="col" class="text-right">Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>
+                                <a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a>
+                              </td>
+                              <td>
+                                <img src="https://themesbox.in/admin-templates/olian/html/light-vertical/assets/images/ecommerce/product_01.svg" class="img-fluid" width="35" alt="product" />
+                              </td>
+                              <td>Producto</td>
+                              <td>
+                                <div class="form-group mb-0">
+                                  <input type="number" class="form-control cart-qty" name="cartQty1" id="cartQty1" value="1" />
+                                </div>
+                              </td>
+                              <td>$10</td>
+                              <td class="text-right">$500</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>
+                                <a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a>
+                              </td>
+                              <td>
+                                <img src="https://themesbox.in/admin-templates/olian/html/light-vertical/assets/images/ecommerce/product_02.svg" class="img-fluid" width="35" alt="product" />
+                              </td>
+                              <td>Producto</td>
+                              <td>
+                                <div class="form-group mb-0">
+                                  <input type="number" class="form-control cart-qty" name="cartQty2" id="cartQty2" value="1" />
+                                </div>
+                              </td>
+                              <td>$20</td>
+                              <td class="text-right">$200</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>
+                                <a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a>
+                              </td>
+                              <td>
+                                <img src="https://themesbox.in/admin-templates/olian/html/light-vertical/assets/images/ecommerce/product_03.svg" class="img-fluid" width="35" alt="product" />
+                              </td>
+                              <td>Producto</td>
+                              <td>
+                                <div class="form-group mb-0">
+                                  <input type="number" class="form-control cart-qty" name="cartQty3" id="cartQty3" value="1" />
+                                </div>
+                              </td>
+                              <td>$30</td>
+                              <td class="text-right">$300</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="cart-body">
+                      <div class="row">
+                        <div class="col-md-12 order-1 order-lg-2 col-lg-7 col-xl-6">
+                          <div class="order-total table-responsive">
+                            <table class="table table-borderless text-right">
+                              <tbody>
+                                <tr>
+                                  <td class="f-w-7 font-18">
+                                    <h4>Total:</h4>
+                                  </td>
+                                  <td class="f-w-7 font-18">
+                                    <h4>$1180.00</h4>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cart-footer text-right">
+                      <button type="button" class="btn btn-info my-1"><i class="ri-save-line mr-2"></i>Actualizar carrito</button>
+                      <a href="{% url "pago" %}" class="btn btn-success my-1">Proceder al pago <i class="ri-arrow-right-line ml-2"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End col -->
+      </div>
+      <!-- End row -->
+    </div>
+  </div>
+{% endblock %}
+{% block scripts %}
+  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
