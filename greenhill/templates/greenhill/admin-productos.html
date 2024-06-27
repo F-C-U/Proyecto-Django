@@ -48,7 +48,7 @@
                             </td>
                             <td id="idProducto" class="text-nowrap align-middle text-center">{{ p.id }}</td>
                             <td class="text-nowrap align-middle text-center">{{ p.nombre }}</td>
-                            <td class="text-nowrap align-middle text-center">{{ p.precio }}</td>
+                            <td class="text-nowrap align-middle text-center">${{ p.precio }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
                                 <a class="btn btn-primary" href="{% url 'editar-producto' p.id %}">Editar</a>

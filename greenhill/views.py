@@ -93,3 +93,9 @@ def registro(request):
     }
     
     return render(request,'greenhill/registrarse.html',datos)
+
+def carrito(request):
+    return render(request,'greenhill/carrito.html')
+
+def pedidos(request):
+    return render(request,'greenhill/admin-pedidos.html')

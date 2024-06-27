@@ -14,6 +14,8 @@ urlpatterns = [
     path('pago',pago,name='pago'),
     path('usuarios',usuarios,name='usuarios'),
     path('registrarse',registro,name='registrarse'),
+    path('carrito',carrito,name='carrito'),
+    path('pedidos',pedidos,name='pedidos'),
 ]
 
 if settings.DEBUG:
