@@ -80,7 +80,7 @@ def eliminarUsuario(request, id):
     return redirect(to='usuarios')
 
 def registro(request):
-    form= PersonaForm()
+    form = PersonaForm()
     if request.method == "POST":
         form = PersonaForm(request.POST,files=request.FILES)
         if form.is_valid():
