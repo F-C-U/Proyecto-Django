@@ -95,7 +95,25 @@ def registro(request):
     return render(request,'greenhill/registrarse.html',datos)
 
 def carrito(request):
-    return render(request,'greenhill/carrito.html')
+    carrito,creado = Carrito.objects.get_or_create(id=request.session.get("carrito_id"))
+    items = CarritoItem.objects.filter(carrito=carrito)
+    precio_total = sum(item.producto.precio * item.cantidad for item in items)
+    return render(request,'greenhill/carrito.html',{'carrito': carrito, 'items': items, 'precio_total': precio_total})
+
+def agregarCarrito(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    carrito, creado = Carrito.objects.get_or_create(id=request.session.get('carrito_id'))
+    carrito_item, creado = CarritoItem.objects.get_or_create(carrito = carrito, producto = producto)
+    if not creado:
+        carrito_item.cantidad += 1
+    carrito_item.save()
+    request.session['carrito_id'] = carrito.id
+    return redirect(to='carrito')
+
+def quitarCarrito(request, id):
+    carrito_item = get_object_or_404(CarritoItem, id=id)
+    carrito_item.delete()
+    return redirect(to='carrito')
 
 def pedidos(request):
     return render(request,'greenhill/admin-pedidos.html')

@@ -30,7 +30,7 @@
   <div class="container">
     {% if producto.stock != 0 %}
       <a class="btn bg-white text-black" href="{% url 'pago' %}">Comprar</a>
-      <a class="btn bg-white text-black float-end" href="#">Agregar al Carrito</a>
+      <a class="btn bg-white text-black float-end" href="{% url 'agregar-carrito' producto.id %}">Agregar al Carrito</a>
     {% endif %}
   </div>
 {% endblock %}
