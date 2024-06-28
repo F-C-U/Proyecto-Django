@@ -11,11 +11,13 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=50)
     correo = models.EmailField()
     telefono = models.IntegerField()
-    region = models.CharField(max_length=200, null=True)
-    comuna = models.CharField(max_length=200, null=True)
+    region = models.CharField(
+        max_length=200,
+    )
+    comuna = models.CharField(
+        max_length=200,
+    )
     direccion = models.CharField(max_length=100)
-    pass1 = models.CharField(max_length=16)
-    pass2 = models.CharField(max_length=16)
 
     def __str__(self):
         return f"{self.nombre} - {self.apellido}"
@@ -55,17 +57,21 @@ class CarritoItem(models.Model):
 
 
 class Pedido(models.Model):
+    carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE)
     fecha = models.DateField()
     total = models.IntegerField()
     estado = models.CharField(
         choices=[
+            ("Pendiente", "Pendiente"),
             ("En proceso", "En proceso"),
             ("Enviado", "Enviado"),
             ("Entregado", "Entregado"),
+            ("Cancelado", "Cancelado"),
         ],
         max_length=50,
-        default="En proceso",
+        default="Pendiente",
     )
+    total = models.PositiveIntegerField()
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
 
     def __str__(self):

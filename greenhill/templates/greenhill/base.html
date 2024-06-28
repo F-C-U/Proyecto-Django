@@ -38,7 +38,7 @@
                   <a class="dropdown-item" href="{% url 'admin-productos' %}">Productos</a>
                   <a class="dropdown-item" href="{% url 'admin-agregar' %}">Agregar producto</a>
                   <a class="dropdown-item" href="{% url 'usuarios' %}">Usuarios</a>
-                  <a class="dropdown-item" href="{% url 'pedidos' %}">Pedidos</a>
+                  <a class="dropdown-item" href="{% url 'admin-pedidos' %}">Pedidos</a>
                 </div>
               </li>
             {% endif %}
@@ -53,10 +53,10 @@
         <div class="container">
           <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="historial.html">Mis compras</a>
+              <a class="nav-link" href="{% url 'pedidos' %}">Mis compras</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url "carrito" %}">Carrito</a>
+              <a class="nav-link" href="{% url 'carrito' %}">Carrito</a>
             </li>
             {% if user.is_authenticated %}
               <li class="nav-item">
@@ -73,7 +73,7 @@
                 <a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'registrarse' %}">Registrarse</a>
+                <a class="nav-link" href="{% url 'registro-usr' %}">Registrarse</a>
               </li>
             {% endif %}
           </ul>
