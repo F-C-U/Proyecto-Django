@@ -129,16 +129,6 @@ def registro(request):
     finally:
         form = PersonaForm()
         datos = {"form": form}
-        """ if form.is_valid():
-
-            form.instance.usuario = request.user
-            region=form.cleaned_data['region']
-            print(region)
-            comuna=form.cleaned_data['comuna'] 
-            print(comuna)
-            print(form)
-            form.save()
-            return redirect(to="index") """
 
     return render(request, "greenhill/registrarse.html", datos)
 
@@ -189,8 +179,11 @@ def pedidos(request):
 def crearPedido(request):
     carrito = get_object_or_404(Carrito, id=request.session.get("carrito_id"))
     if not CarritoItem.objects.filter(carrito=carrito).exists():
-        return HttpResponse("No hay productos en el carrito",400)
-    total = sum(item.producto.precio * item.cantidad for item in CarritoItem.objects.filter(carrito=carrito))
+        return HttpResponse("No hay productos en el carrito", 400)
+    total = sum(
+        item.producto.precio * item.cantidad
+        for item in CarritoItem.objects.filter(carrito=carrito)
+    )
     pedido = Pedido(carrito=carrito, total=total)
     del request.session["carrito_id"]
     return redirect(to="pedidos")
