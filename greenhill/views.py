@@ -108,10 +108,6 @@ def registro(request):
         if request.method == "POST":
             print(request.POST)
             # form = PersonaForm(request.POST)
-
-            for valor in request.POST.values():
-                print(valor)
-
             if len(request.POST) == 9:
 
                 persona = Persona()
