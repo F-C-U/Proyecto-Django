@@ -32,23 +32,49 @@
                       </thead>
                       <tbody>
                         {% for p in pedidos %}
-                        <tr>
-                          <td>
-                            <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                              <input type="checkbox" class="custom-control-input" id="all-items" />
-                              <label class="custom-control-label" for="all-items"></label>
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
+                                <input type="checkbox" class="custom-control-input" id="all-items" />
+                                <label class="custom-control-label" for="all-items"></label>
+                              </div>
+                            </td>
+                            <td class="text-nowrap align-middle">131812</td>
+                            <td>En camino</td>
+                            <td class="text-center align-middle">
+                              <div class="btn-group align-top">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Detalles</button>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- The Modal -->
+                          <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Modal Heading</h4>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                  <div class="mb-3">
+                                    {% for producto in p.carrito.carritoitem %}
+                                      <p>Producto: {{ producto }}</p>
+                                    {% endfor %}
+                                    <p>Direccion:</p>
+                                    <label for="" class="form-label">Estado: {{ p.estado }}</label>
+                                  </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
                             </div>
-                          </td>
-                          <td class="text-nowrap align-middle">131812</td>
-                          <td>En camino</td>
-                          <td class="text-center align-middle">
-                            <div class="btn-group align-top">
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Detalles</button>
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
+                          </div>
                         {% endfor %}
                       </tbody>
                     </table>
@@ -85,33 +111,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div class="mb-3">
-            <p>Producto: Producto</p>
-            <p>Direccion: Envio</p>
-            <p>Fecha entrega: 30/04/2024</p>
-            <label for="" class="form-label">Estado: En camino</label>
-          </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

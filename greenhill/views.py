@@ -167,23 +167,30 @@ def quitarCarrito(request, id):
     return redirect(to="carrito")
 
 
+# @login_required
 def adminPedidos(request):
-    return render(request, "greenhill/admin-pedidos.html")
+    pedidos = Pedido.objects.all()
+    datos = {"pedidos": pedidos}
+    return render(request, "greenhill/admin-pedidos.html", datos)
 
 
 def pedidos(request):
-    pedidos = pedidos.objects.all()
-    return render(request, "greenhill/pedidos.html", {"pedidos": pedidos})
+    persona = get_object_or_404(Persona, usuario=request.user)
+    pedidos = Pedido.objects.filter(persona=persona)
+    datos = {"pedidos": pedidos}
+    print(datos)
+    return render(request, "greenhill/pedidos.html", datos)
 
 
 def crearPedido(request):
     carrito = get_object_or_404(Carrito, id=request.session.get("carrito_id"))
+    persona = get_object_or_404(Persona, usuario=request.user)
     if not CarritoItem.objects.filter(carrito=carrito).exists():
         return HttpResponse("No hay productos en el carrito", 400)
     total = sum(
         item.producto.precio * item.cantidad
         for item in CarritoItem.objects.filter(carrito=carrito)
     )
-    pedido = Pedido(carrito=carrito, total=total)
+    pedido = Pedido.objects.create(carrito=carrito, persona=persona, total=total)
     del request.session["carrito_id"]
     return redirect(to="pedidos")

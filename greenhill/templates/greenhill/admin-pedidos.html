@@ -29,22 +29,24 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                              <input type="checkbox" class="custom-control-input" id="all-items" />
-                              <label class="custom-control-label" for="all-items"></label>
-                            </div>
-                          </td>
-                          <td class="text-nowrap align-middle">131812</td>
-                          <td>En camino</td>
-                          <td class="text-center align-middle">
-                            <div class="btn-group align-top">
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Cambiar estado</button>
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
-                            </div>
-                          </td>
-                        </tr>
+                        {% for p in pedidos %}
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
+                                <input type="checkbox" class="custom-control-input" id="all-items" />
+                                <label class="custom-control-label" for="all-items"></label>
+                              </div>
+                            </td>
+                            <td class="text-nowrap align-middle">{{ p.id }}</td>
+                            <td>{{ p.estado }}</td>
+                            <td class="text-center align-middle">
+                              <div class="btn-group align-top">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Cambiar estado</button>
+                                <button class="btn btn-sm btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>

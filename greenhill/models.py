@@ -11,12 +11,8 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=50)
     correo = models.EmailField()
     telefono = models.IntegerField()
-    region = models.CharField(
-        max_length=200,
-    )
-    comuna = models.CharField(
-        max_length=200,
-    )
+    region = models.CharField(max_length=200, default=None)
+    comuna = models.CharField(max_length=200, default=None)
     direccion = models.CharField(max_length=100)
 
     def __str__(self):
@@ -57,8 +53,8 @@ class CarritoItem(models.Model):
 
 
 class Pedido(models.Model):
-    carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE, default=None)
+    fecha = models.DateField(auto_now_add=True)
     total = models.IntegerField()
     estado = models.CharField(
         choices=[
