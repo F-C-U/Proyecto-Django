@@ -1,0 +1,40 @@
+{% extends 'greenhill/base.html' %}
+{% load static %}
+{% block imports %}
+  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
+{% endblock %}
+{% block contenido %}
+  <div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <th>ID pedido</th>
+        <th>Productos</th>
+      </thead>
+      <tbody>
+        <td>{{ pedido.id }}</td>
+        <td>
+          <table class="table table-bordered">
+            <thead>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+            </thead>
+            <tbody>
+                {% for p in pedido.carrito.carritoitem_set.all %}
+                  <td>{{ p.producto.nombre }}</td>
+                  <td>{{ p.cantidad }}</td>
+                  <td>${{ p.producto.precio }}</td>
+                {% endfor %}
+            </tbody>
+          </table>
+        </td>
+      </tbody>
+    </table>
+    <div class="container">
+      <p class="text-center">${{ pedido.total }}</p>
+    </div>
+  </div>
+{% endblock %}
+{% block scripts %}
+  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
