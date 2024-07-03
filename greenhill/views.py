@@ -1,5 +1,5 @@
 import re
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
 from .models import *
@@ -12,16 +12,19 @@ def index(request):
 
 
 def adminAgregar(request):
-    form = ProductoForm()
-    if request.method == "POST":
-        form = ProductoForm(request.POST, files=request.FILES)
+    if request.user.is_authenticated and request.user.is_superuser:
+        form = ProductoForm()
+        if request.method == "POST":
+            form = ProductoForm(request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("admin-agregar")
+        else:
+            form = ProductoForm()
+        datos = {"form": form}
+        return render(request, "greenhill/admin-agregar-producto.html", datos)
     else:
-        form = ProductoForm()
-    datos = {"form": form}
-    return render(request, "greenhill/admin-agregar-producto.html", datos)
+        return redirect(to="index")
 
 
 def catalogo(request):
@@ -43,27 +46,34 @@ def paginaProductos(request):
 
 
 def editarProductos(request, id):
-    producto = get_object_or_404(Producto, id=id)
-    data = {"form": ProductoForm(instance=producto)}
-    if request.method == "POST":
-        formulario = ProductoForm(
-            data=request.POST, instance=producto, files=request.FILES
-        )
-        if formulario.is_valid():
-            formulario.save()
-            return redirect(to="admin-productos")
-        data["form"] = formulario
-    return render(request, "greenhill/admin-modificar-producto.html", data)
+    if request.user.is_authenticated and request.user.is_superuser:
+        producto = get_object_or_404(Producto, id=id)
+        data = {"form": ProductoForm(instance=producto)}
+        if request.method == "POST":
+            formulario = ProductoForm(
+                data=request.POST, instance=producto, files=request.FILES
+            )
+            if formulario.is_valid():
+                formulario.save()
+                return redirect(to="admin-productos")
+            data["form"] = formulario
+        return render(request, "greenhill/admin-modificar-producto.html", data)
+    else:
+        return redirect(to="index")
 
 
 def eliminarProductos(request, id):
-    producto = get_object_or_404(Producto, id=id)
-    producto.delete()
-    return redirect(to="admin-productos")
+    if request.user.is_authenticated and request.user.is_superuser:
+        producto = get_object_or_404(Producto, id=id)
+        producto.delete()
+        return redirect(to="admin-productos")
+    else:
+        return redirect(to="index")
 
 
 def perfil(request):
-    return render(request, "greenhill/perfil.html")
+    if request.user.is_authenticated:
+        return render(request, "greenhill/perfil.html")
 
 
 def pago(request):
@@ -71,15 +81,21 @@ def pago(request):
 
 
 def usuarios(request):
-    usuarios = Persona.objects.all()
-    datos = {"usuarios": usuarios}
-    return render(request, "greenhill/admin-usuarios.html", datos)
+    if request.user.is_authenticated and request.user.is_superuser:
+        usuarios = Persona.objects.all()
+        datos = {"usuarios": usuarios}
+        return render(request, "greenhill/admin-usuarios.html", datos)
+    else:
+        return redirect(to="index")
 
 
 def eliminarUsuario(request, id):
-    usuario = get_object_or_404(Persona, id=id)
-    usuario.delete()
-    return redirect(to="usuarios")
+    if request.user.is_authenticated and request.user.is_superuser:
+        usuario = get_object_or_404(Persona, id=id)
+        usuario.delete()
+        return redirect(to="usuarios")
+    else:
+        return redirect(to="index")
 
 
 def registroUser(request):
@@ -134,16 +150,19 @@ def registro(request):
 
 
 def carrito(request):
-    carrito, creado = Carrito.objects.get_or_create(
-        id=request.session.get("carrito_id")
-    )
-    items = CarritoItem.objects.filter(carrito=carrito)
-    precio_total = sum(item.producto.precio * item.cantidad for item in items)
-    return render(
-        request,
-        "greenhill/carrito.html",
-        {"carrito": carrito, "items": items, "precio_total": precio_total},
-    )
+    if request.user.is_authenticated:
+        carrito, creado = Carrito.objects.get_or_create(
+            id=request.session.get("carrito_id")
+        )
+        items = CarritoItem.objects.filter(carrito=carrito)
+        precio_total = sum(item.producto.precio * item.cantidad for item in items)
+        return render(
+            request,
+            "greenhill/carrito.html",
+            {"carrito": carrito, "items": items, "precio_total": precio_total},
+        )
+    else:
+        return redirect(to="login")
 
 
 def agregarCarrito(request, id):
@@ -167,19 +186,33 @@ def quitarCarrito(request, id):
     return redirect(to="carrito")
 
 
-# @login_required
 def adminPedidos(request):
-    pedidos = Pedido.objects.all()
-    datos = {"pedidos": pedidos}
-    return render(request, "greenhill/admin-pedidos.html", datos)
+    if request.user.is_authenticated and request.user.is_superuser:
+        pedidos = Pedido.objects.all()
+        datos = {"pedidos": pedidos}
+        return render(request, "greenhill/admin-pedidos.html", datos)
+    else:
+        return redirect(to="index")
 
 
 def pedidos(request):
-    persona = get_object_or_404(Persona, usuario=request.user)
-    pedidos = Pedido.objects.filter(persona=persona)
-    datos = {"pedidos": pedidos}
-    print(datos)
-    return render(request, "greenhill/pedidos.html", datos)
+    if request.user.is_authenticated:
+        persona = get_object_or_404(Persona, usuario=request.user)
+        pedidos = Pedido.objects.filter(persona=persona)
+        datos = {"pedidos": pedidos}
+        print(datos)
+        return render(request, "greenhill/pedidos.html", datos)
+    else:
+        return redirect(to="login")
+
+
+def pedido(request, id):
+    if request.user.is_authenticated:
+        pedido = get_object_or_404(Pedido, id=id)
+        datos = {"pedido": pedido}
+        return render(request, "greenhill/detalle-pedido.html", datos)
+    else:
+        return redirect(to="login")
 
 
 def crearPedido(request):

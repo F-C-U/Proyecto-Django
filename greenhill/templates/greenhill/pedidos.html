@@ -39,42 +39,14 @@
                                 <label class="custom-control-label" for="all-items"></label>
                               </div>
                             </td>
-                            <td class="text-nowrap align-middle">131812</td>
-                            <td>En camino</td>
+                            <td class="text-nowrap align-middle">{{ p.id }}</td>
+                            <td>{{ p.estado }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Detalles</button>
+                                <a href="{% url 'pedidousr' p.id %}">Detalles</a>
                               </div>
                             </td>
                           </tr>
-                          <!-- The Modal -->
-                          <div class="modal" id="myModal">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                  <h4 class="modal-title">Modal Heading</h4>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                  <div class="mb-3">
-                                    {% for producto in p.carrito.carritoitem %}
-                                      <p>Producto: {{ producto }}</p>
-                                    {% endfor %}
-                                    <p>Direccion:</p>
-                                    <label for="" class="form-label">Estado: {{ p.estado }}</label>
-                                  </div>
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                         {% endfor %}
                       </tbody>
                     </table>

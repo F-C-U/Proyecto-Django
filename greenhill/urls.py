@@ -22,6 +22,7 @@ urlpatterns = [
     path("eliminar-carrito/<int:id>/", quitarCarrito, name="eliminar-carrito"),
     path("pedidos", pedidos, name="pedidos"),
     path("pedido/", crearPedido, name="pedido"),
+    path("pedido/<int:id>/", pedido, name="pedidousr"),
 ]
 
 if settings.DEBUG:

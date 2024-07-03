@@ -51,12 +51,15 @@
       <nav class="navbar navbar-expand-sm text-light navbar-dark">
         <div class="container">
           <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'pedidos' %}">Mis compras</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'carrito' %}">Carrito</a>
-            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pedidos' %}">Mis compras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'carrito' %}">Carrito</a>
+              </li>
+            {% endif %}
+
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <form action="{% url 'logout' %}" method="post">
