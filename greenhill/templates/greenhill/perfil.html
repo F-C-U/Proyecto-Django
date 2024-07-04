@@ -6,12 +6,12 @@
 {% block contenido %}
   <!-- Perfil -->
   <div class="container text-center p-5 bg-black">
-    <p>Nombre: Gato Malaonda</p>
-    <p>Correo: gatomalaonda1990@gmail.com</p>
-    <p>Region: Bio Bio</p>
-    <p>Ciudad: Concepcion</p>
-    <p>Direccion: Prat 2131</p>
-    <p>Telefono: +56999999999</p>
+    <p>Nombre: {{ persona }}</p>
+    <p>Correo: {{ persona.correo }}</p>
+    <p>Region: {{ persona.region }}</p>
+    <p>Ciudad: {{ persona.comuna }}</p>
+    <p>Direccion: {{ persona.direccion }}</p>
+    <p>Telefono: +569{{ persona.telefono }}</p>
     <!-- Button to Open the Modal -->
     <div>
       <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editarDatos">Editar datos</button>

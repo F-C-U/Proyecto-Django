@@ -73,7 +73,9 @@ def eliminarProductos(request, id):
 
 def perfil(request):
     if request.user.is_authenticated:
-        return render(request, "greenhill/perfil.html")
+        persona = get_object_or_404(Persona, usuario=request.user)
+        datos = {"persona": persona}
+        return render(request, "greenhill/perfil.html",datos)
 
 
 def pago(request):
@@ -116,36 +118,16 @@ def registroUser(request):
 
 
 def registro(request):
-
-    try:
+    if request.method == "POST":
+        form = PersonaForm(request.POST)
+        form.instance = form.instance.region
+        if form.is_valid():
+            form.instance.usuario = request.user
+            form.save()
+            return redirect(to="index")
+    else:
         form = PersonaForm()
-        datos = {"form": form}
-
-        if request.method == "POST":
-            print(request.POST)
-            # form = PersonaForm(request.POST)
-            if len(request.POST) == 9:
-
-                persona = Persona()
-                persona.rut = request.POST.get("rut")
-                persona.nombre = request.POST.get("nombre")
-                persona.apellido = request.POST.get("apellido")
-                persona.correo = request.POST.get("correo")
-                persona.telefono = request.POST.get("telefono")
-                persona.region = request.POST.get("region")
-                persona.comuna = request.POST.get("comuna")
-                persona.direccion = request.POST.get("direccion")
-                persona.usuario = request.user
-                persona.save()
-                return redirect(to="index")
-            else:
-                raise Exception("Error en la cantidad de datos")
-    except Exception as e:
-        print(e)
-    finally:
-        form = PersonaForm()
-        datos = {"form": form}
-
+    datos = {"form": form}
     return render(request, "greenhill/registrarse.html", datos)
 
 

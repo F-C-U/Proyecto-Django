@@ -11,8 +11,8 @@ class ProductoForm(forms.ModelForm):
 
 
 class PersonaForm(forms.ModelForm):
-    region = forms.ChoiceField(choices=[])
-    comuna = forms.ChoiceField(choices=[])
+    region = forms.ChoiceField(choices=[], required=False)
+    comuna = forms.ChoiceField(choices=[], required=False)
 
     class Meta:
         model = Persona
@@ -26,6 +26,11 @@ class PersonaForm(forms.ModelForm):
             "comuna",
             "direccion",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["region"].choices = [("", "Seleccione una región")]
+        self.fields["comuna"].choices = [("", "Seleccione una comuna")]
 
 
 class RegistroForm(UserCreationForm):
