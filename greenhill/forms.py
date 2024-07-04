@@ -13,7 +13,6 @@ class ProductoForm(forms.ModelForm):
 class PersonaForm(forms.ModelForm):
     region = forms.ChoiceField(choices=[], required=False)
     comuna = forms.ChoiceField(choices=[], required=False)
-
     class Meta:
         model = Persona
         fields = [

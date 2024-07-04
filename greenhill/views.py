@@ -75,7 +75,7 @@ def perfil(request):
     if request.user.is_authenticated:
         persona = get_object_or_404(Persona, usuario=request.user)
         datos = {"persona": persona}
-        return render(request, "greenhill/perfil.html",datos)
+        return render(request, "greenhill/perfil.html", datos)
 
 
 def pago(request):
@@ -120,10 +120,22 @@ def registroUser(request):
 def registro(request):
     if request.method == "POST":
         form = PersonaForm(request.POST)
-        form.instance = form.instance.region
+        region = request.POST.get("region")
+        comuna = request.POST.get("comuna")
+        request.session["region"] = region
+        request.session["comuna"] = comuna
+        request.POST._mutable = True
+        request.POST["region"] = ""
+        request.POST["comuna"] = ""
         if form.is_valid():
             form.instance.usuario = request.user
+            form.instance.region = request.session.get("region")
+            form.instance.comuna = request.session.get("comuna")
             form.save()
+            if "region" in request.session:
+                del request.session["region"]
+            if "comuna" in request.session:
+                del request.session["comuna"]
             return redirect(to="index")
     else:
         form = PersonaForm()
