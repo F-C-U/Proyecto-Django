@@ -12,6 +12,7 @@ urlpatterns = [
     path("editar-producto/<int:id>/", editarProductos, name="editar-producto"),
     path("admin-productos/", paginaProductos, name="admin-productos"),
     path("perfil", perfil, name="perfil"),
+    path("editar-perfil/<int:id>/", editarPerfil, name="editar-perfil"),
     path("pago", pago, name="pago"),
     path("usuarios", usuarios, name="usuarios"),
     path("registrarse", registro, name="registrarse"),

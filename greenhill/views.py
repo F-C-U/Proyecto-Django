@@ -78,6 +78,21 @@ def perfil(request):
         return render(request, "greenhill/perfil.html", datos)
 
 
+def editarPerfil(request, id):
+    if request.user.is_authenticated:
+        persona = get_object_or_404(Persona, id=id)
+        data = {"form": PersonaForm(instance=persona)}
+        if request.method == "POST":
+            formulario = PersonaForm(data=request.POST, instance=persona)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect(to="perfil")
+            data["form"] = formulario
+        return render(request, "greenhill/editar-perfil.html", data)
+    else:
+        return redirect(to="index")
+
+
 def pago(request):
     return render(request, "greenhill/pago.html")
 
