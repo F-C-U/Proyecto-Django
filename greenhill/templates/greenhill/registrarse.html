@@ -2,33 +2,30 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block imports %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
 {% block contenido %}
-  <!-- Formulario registro -->
-  <div class="row mt-3 animate__animated animate__fadeInUp">
-    <div class="col-md p-md-2"></div>
-    <div class="col-md p-md-8 m-s-3 bg-dark">
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button class="btn btn-primary" type="submit">Rgistrarse</button>
-      </form>
-    </div>
-    <div class="col-md p-md-2"></div>
+<!-- Formulario registro -->
+<div class="row mt-3 animate__animated animate__fadeInUp">
+  <div class="col-md p-md-2"></div>
+  <div class="col-md p-md-8 m-s-3 bg-dark">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-primary" type="submit">Rgistrarse</button>
+    </form>
   </div>
-  <!-- Formulario registro -->
+  <div class="col-md p-md-2"></div>
+</div>
+<!-- Formulario registro -->
 {% endblock %}
-<!-- Scripts -->
-<script src="js/jquery.validate.js"></script>
-<script src="js/validacionesRegistro.js"></script>
-<script src="js/rellenarSelect.js"></script>
-<script src="js/messages_es.js"></script>
-<!-- Scripts -->
 {% block scripts %}
-  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'greenhill/js/jquery-3.7.1.min.js' %}"></script>
-  <script src="{% static 'greenhill/js/rellenarSelect.js' %}"></script>
-  <script src="{% static 'greenhill/js/si.js' %}"></script>
+<script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'greenhill/js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'greenhill/js/jquery.validate.js' %}"></script>
+<script src="{% static 'greenhill/js/messages_es.js' %}"></script>
+<script src="{% static 'greenhill/js/rellenarSelect.js' %}"></script>
+<script src="{% static 'greenhill/js/si.js' %}"></script>
+<script src="{% static 'greenhill/js/validacionesRegistro.js' %}"></script>
 {% endblock %}

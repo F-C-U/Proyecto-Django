@@ -5,3 +5,5 @@ greenhill/media/*
 db.sqlite3
 .vscode
 .venv
+greenhill/__init__.py
+sitio/__init__.py

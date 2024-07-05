@@ -31,7 +31,7 @@ $(document).ready(function () {
     $("#formRegistro").validate({
         debug: false,
         rules: {
-            rut: {
+            id_rut: {
                 required: true,
                 validaRUT: true
             },
