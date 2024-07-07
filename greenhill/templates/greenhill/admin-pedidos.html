@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
 {% block contenido %}
-  <h1>Administracion de pedidos</h1>
+  <h1 class="my-4">Administración de pedidos</h1>
   <div class="container">
     <div class="row flex-lg-nowrap">
       <div class="col">
@@ -23,7 +23,7 @@
                               <label class="custom-control-label" for="all-items"></label>
                             </div>
                           </th>
-                          <th class="max-width">Numero de pedido</th>
+                          <th class="max-width">Número de pedido</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -33,22 +33,53 @@
                           <tr>
                             <td>
                               <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                                <input type="checkbox" class="custom-control-input" id="all-items" />
-                                <label class="custom-control-label" for="all-items"></label>
+                                <input type="checkbox" class="custom-control-input" id="item-{{ p.id }}" />
+                                <label class="custom-control-label" for="item-{{ p.id }}"></label>
                               </div>
                             </td>
                             <td class="text-nowrap align-middle">{{ p.id }}</td>
                             <td>{{ p.estado }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Cambiar estado</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal{{ p.id }}">Cambiar estado</button>
                               </div>
                             </td>
                           </tr>
+                          <!-- Modal -->
+                          <div class="modal fade" id="myModal{{ p.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Cambiar estado de pedido #{{ p.id }}</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form method="post" action="{% url 'cambiar-estado-pedido' p.id %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                      <label for="estado{{ p.id }}" class="form-label">Estado</label>
+                                      <select class="form-select" id="estado{{ p.id }}" name="estado">
+                                        <option value="En preparación">En preparación</option>
+                                        <option value="En camino">En camino</option>
+                                        <option value="Entregado">Entregado</option>
+                                        <option value="Cancelado">Cancelado</option>
+                                      </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal -->
                         {% endfor %}
                       </tbody>
                     </table>
                   </div>
+                  <!-- Pagination -->
                   <div class="d-flex justify-content-center">
                     <ul class="pagination mt-3 mb-0">
                       <li class="disabled page-item">
@@ -77,6 +108,7 @@
                       </li>
                     </ul>
                   </div>
+                  <!-- Pagination -->
                 </div>
               </div>
             </div>
@@ -85,37 +117,8 @@
       </div>
     </div>
   </div>
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="" class="form-label">Estado</label>
-            <select class="form-select form-select" name="" id="">
-              <option selected>En preparacion</option>
-              <option value="">En camino</option>
-              <option value="">Entregado</option>
-              <option value="">Cancelado</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
 {% endblock %}
+
 {% block scripts %}
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

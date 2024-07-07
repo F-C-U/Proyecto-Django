@@ -1,25 +1,48 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
+
 {% block imports %}
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
+
 {% block contenido %}
-  <!-- Perfil -->
-  <div class="container text-center p-5 bg-black">
-    <p>Nombre: {{ persona }}</p>
-    <p>Correo: {{ persona.correo }}</p>
-    <p>Region: {{ persona.region }}</p>
-    <p>Ciudad: {{ persona.comuna }}</p>
-    <p>Direccion: {{ persona.direccion }}</p>
-    <p>Telefono: +569{{ persona.telefono }}</p>
-    <!-- Button to Open the Modal -->
-    <div>
-      <a href="{% url "editar-perfil" persona.id %}">Editar perfil</a>
-      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#cambioContraseña">Cambiar contraseña</button>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center">Perfil de Usuario</h5>
+        <div class="row mt-4">
+          <div class="col-md-6 offset-md-3">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <strong>Nombre:</strong> {{ persona.nombre }}
+              </li>
+              <li class="list-group-item">
+                <strong>Correo:</strong> {{ persona.correo }}
+              </li>
+              <li class="list-group-item">
+                <strong>Región:</strong> {{ persona.region }}
+              </li>
+              <li class="list-group-item">
+                <strong>Ciudad:</strong> {{ persona.comuna }}
+              </li>
+              <li class="list-group-item">
+                <strong>Dirección:</strong> {{ persona.direccion }}
+              </li>
+              <li class="list-group-item">
+                <strong>Teléfono:</strong> +569{{ persona.telefono }}
+              </li>
+            </ul>
+            <div class="text-center mt-4">
+              <a href="{% url 'editar-perfil' persona.id %}" class="btn btn-primary mx-2">Editar perfil</a>
+              <a href="{% url 'index' %}" class="btn btn-primary mx-2">Cambiar contraseña</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- Perfil -->
 {% endblock %}
+
 {% block scripts %}
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

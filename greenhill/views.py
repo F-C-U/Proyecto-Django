@@ -72,14 +72,22 @@ def eliminarProductos(request, id):
 
 
 def perfil(request):
-    if request.user.is_authenticated:
+    if (
+        request.user.is_authenticated
+        and Persona.objects.filter(usuario=request.user).exists()
+    ):
         persona = get_object_or_404(Persona, usuario=request.user)
         datos = {"persona": persona}
         return render(request, "greenhill/perfil.html", datos)
+    else:
+        return redirect(to="registrarse")
 
 
 def editarPerfil(request, id):
-    if request.user.is_authenticated:
+    if (
+        request.user.is_authenticated
+        and Persona.objects.filter(usuario=request.user).exists()
+    ):
         persona = get_object_or_404(Persona, id=id)
         data = {"form": PersonaForm(instance=persona)}
         if request.method == "POST":
@@ -159,7 +167,10 @@ def registro(request):
 
 
 def carrito(request):
-    if request.user.is_authenticated:
+    if (
+        request.user.is_authenticated
+        and Persona.objects.filter(usuario=request.user).exists()
+    ):
         carrito, creado = Carrito.objects.get_or_create(
             id=request.session.get("carrito_id")
         )
@@ -170,6 +181,12 @@ def carrito(request):
             "greenhill/carrito.html",
             {"carrito": carrito, "items": items, "precio_total": precio_total},
         )
+    elif (
+        request.user.is_authenticated
+        and not Persona.objects.filter(usuario=request.user).exists()
+    ):
+        return redirect(to="registrarse")
+
     else:
         return redirect(to="login")
 
@@ -205,23 +222,37 @@ def adminPedidos(request):
 
 
 def pedidos(request):
-    if request.user.is_authenticated:
+    if (
+        request.user.is_authenticated
+        and Persona.objects.filter(usuario=request.user).exists()
+    ):
         persona = get_object_or_404(Persona, usuario=request.user)
         pedidos = Pedido.objects.filter(persona=persona)
         datos = {"pedidos": pedidos}
         print(datos)
         return render(request, "greenhill/pedidos.html", datos)
+    elif (
+        request.user.is_authenticated
+        and not Persona.objects.filter(usuario=request.user).exists()
+    ):
+        return redirect(to="registrarse")
     else:
         return redirect(to="login")
 
 
 def pedido(request, id):
-    if request.user.is_authenticated:
+    if (
+        request.user.is_authenticated
+        and Persona.objects.filter(usuario=request.user).exists()
+    ):
         pedido = get_object_or_404(Pedido, id=id)
         datos = {"pedido": pedido}
         return render(request, "greenhill/detalle-pedido.html", datos)
-    else:
-        return redirect(to="login")
+    elif (
+        request.user.is_authenticated
+        and not Persona.objects.filter(usuario=request.user).exists()
+    ):
+        return redirect(to="registrarse")
 
 
 def crearPedido(request):
@@ -236,3 +267,29 @@ def crearPedido(request):
     pedido = Pedido.objects.create(carrito=carrito, persona=persona, total=total)
     del request.session["carrito_id"]
     return redirect(to="pedidos")
+
+
+def cambiar_estado_pedido(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+
+    if request.method == "POST":
+        nuevo_estado = request.POST.get("estado")
+        pedido.estado = nuevo_estado
+        pedido.save()
+        return redirect("pedidos")
+
+    return redirect("pedidos")
+
+
+def bloquear_usuario(request, user_id):
+    usuario = get_object_or_404(User, id=user_id)
+    usuario.is_active = False
+    usuario.save()
+    return redirect("usuarios")
+
+
+def desbloquear_usuario(request, user_id):
+    usuario = get_object_or_404(User, id=user_id)
+    usuario.is_active = True
+    usuario.save()
+    return redirect("usuarios")

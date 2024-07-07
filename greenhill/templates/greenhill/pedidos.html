@@ -1,9 +1,10 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
+
 {% block imports %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
+
 {% block contenido %}
   <h1 class="text-center pt-2">Historial de pedidos</h1>
 
@@ -25,7 +26,7 @@
                               <label class="custom-control-label" for="all-items"></label>
                             </div>
                           </th>
-                          <th class="max-width">Numero de pedido</th>
+                          <th class="max-width">Número de pedido</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -35,15 +36,15 @@
                           <tr>
                             <td>
                               <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                                <input type="checkbox" class="custom-control-input" id="all-items" />
-                                <label class="custom-control-label" for="all-items"></label>
+                                <input type="checkbox" class="custom-control-input" id="checkbox-{{ forloop.counter }}" />
+                                <label class="custom-control-label" for="checkbox-{{ forloop.counter }}"></label>
                               </div>
                             </td>
                             <td class="text-nowrap align-middle">{{ p.id }}</td>
                             <td>{{ p.estado }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
-                                <a href="{% url 'pedidousr' p.id %}">Detalles</a>
+                                <a href="{% url 'pedidousr' p.id %}" class="btn btn-primary btn-sm">Detalles</a>
                               </div>
                             </td>
                           </tr>
@@ -88,6 +89,7 @@
     </div>
   </div>
 {% endblock %}
+
 {% block scripts %}
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

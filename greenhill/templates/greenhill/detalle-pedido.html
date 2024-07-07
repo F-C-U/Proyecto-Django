@@ -1,40 +1,54 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
+
 {% block imports %}
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
+
 {% block contenido %}
   <div class="container">
-    <table class="table table-bordered">
+    <h2 class="text-center mt-4">Detalles del Pedido</h2>
+    <table class="table table-bordered mt-4">
       <thead>
-        <th>ID pedido</th>
-        <th>Productos</th>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Productos</th>
+        </tr>
       </thead>
       <tbody>
-        <td>{{ pedido.id }}</td>
-        <td>
-          <table class="table table-bordered">
-            <thead>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-            </thead>
-            <tbody>
-                {% for p in pedido.carrito.carritoitem_set.all %}
-                  <td>{{ p.producto.nombre }}</td>
-                  <td>{{ p.cantidad }}</td>
-                  <td>${{ p.producto.precio }}</td>
+        <tr>
+          <td>{{ pedido.id }}</td>
+          <td>
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in pedido.carrito.carritoitem_set.all %}
+                  <tr>
+                    <td>{{ item.producto.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ item.producto.precio }}</td>
+                  </tr>
                 {% endfor %}
-            </tbody>
-          </table>
-        </td>
+              </tbody>
+            </table>
+          </td>
+        </tr>
       </tbody>
     </table>
-    <div class="container">
-      <p class="text-center">${{ pedido.total }}</p>
+
+    <div class="container bg-black py-3 mt-4">
+      <h3 class="text-center">Total</h3>
+      <p class="text-center h3">${{ pedido.total }}</p>
     </div>
   </div>
 {% endblock %}
+
 {% block scripts %}
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

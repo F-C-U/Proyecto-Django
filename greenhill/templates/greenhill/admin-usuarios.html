@@ -32,14 +32,18 @@
                           <tr>
                             <td class="align-middle">
                               <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                <input type="checkbox" class="custom-control-input" id="item-1" />
-                                <label class="custom-control-label" for="item-1"></label>
+                                <input type="checkbox" class="custom-control-input" id="item-{{ forloop.counter }}" />
+                                <label class="custom-control-label" for="item-{{ forloop.counter }}"></label>
                               </div>
                             </td>
                             <td class="text-nowrap align-middle">{{ u }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
-                                <button class="btn">Bloqueado<input type="checkbox" /></button>
+                                {% if user.is_active %}
+                                  <a href="{% url 'bloquear-usuario' user.id %}" class="btn btn-danger">Bloquear</a>
+                                {% else %}
+                                  <a href="{% url 'desbloquear-usuario' user.id %}" class="btn btn-success">Desbloquear</a>
+                                {% endif %}
                               </div>
                             </td>
                           </tr>

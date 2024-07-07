@@ -1,13 +1,15 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
+
 {% block imports %}
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 {% endblock %}
-{% block contenido %}
-  <title>Catalogo</title>
 
-  <h1 class="text-center p-3">Todo el catalogo</h1>
+{% block contenido %}
+  <title>Catálogo</title>
+
+  <h1 class="text-center p-3">Todo el catálogo</h1>
 
   <div class="container">
     <div class="row">
@@ -18,7 +20,7 @@
             <div class="row">
               <!-- BEGIN FILTERS -->
               <div class="col-md-3">
-                <h2 class="grid-title"><i class="fa fa-filter"></i>Filtros</h2>
+                <h2 class="grid-title"><i class="fa fa-filter"></i> Filtros</h2>
                 <hr />
 
                 <!-- BEGIN FILTER BY CATEGORY -->
@@ -33,6 +35,7 @@
                   <label><input type="checkbox" class="icheck" />Nintendo Switch</label>
                 </div>
                 <div class="padding"></div>
+                <!-- END FILTER BY CATEGORY -->
 
                 <!-- BEGIN FILTER BY PRICE -->
                 <h4>Por precio:</h4>
@@ -53,42 +56,34 @@
                 </div>
                 <!-- END FILTER BY PRICE -->
               </div>
-              <!-- Tabla de productos -->
-              {% for p in productos %}
-                <div class="col">
-                  <div class="row">
-                    <div class="col">
-                      <a href="{% url "producto" p.id %}">
-                        <table class="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th>
-                                <img class="mx-auto d-block" src="{{ p.imagen.url }}" alt="" height="100" />
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="text-center">{{ p.nombre }}</td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">${{ p.precio }}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </a>
+              <!-- END FILTERS -->
+
+              <!-- BEGIN PRODUCTS GRID -->
+              <div class="col-md-9">
+                <div class="row">
+                  {% for p in productos %}
+                    <div class="col-md-4 mb-4">
+                      <div class="card h-100">
+                        <a href="{% url 'producto' p.id %}"><img class="card-img-top" src="{{ p.imagen.url }}" alt="{{ p.nombre }}" height="200" /></a>
+                        <div class="card-body text-center">
+                          <h5 class="card-title">{{ p.nombre }}</h5>
+                          <p class="card-text">${{ p.precio }}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  {% endfor %}
                 </div>
-              {% endfor %}
-              <!-- Tabla de productos -->
+              </div>
+              <!-- END PRODUCTS GRID -->
             </div>
           </div>
         </div>
       </div>
+      <!-- END SEARCH RESULT -->
     </div>
   </div>
 {% endblock %}
+
 {% block scripts %}
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

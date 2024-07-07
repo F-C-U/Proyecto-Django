@@ -24,6 +24,13 @@ urlpatterns = [
     path("pedidos", pedidos, name="pedidos"),
     path("pedido/", crearPedido, name="pedido"),
     path("pedido/<int:id>/", pedido, name="pedidousr"),
+    path(
+        "cambiar-estado/<int:pedido_id>/",
+        cambiar_estado_pedido,
+        name="cambiar-estado-pedido",
+    ),
+    path("bloquear/<int:user_id>/", bloquear_usuario, name="bloquear-usuario"),
+    path("desbloquear/<int:user_id>/", desbloquear_usuario, name="desbloquear-usuario"),
 ]
 
 if settings.DEBUG:

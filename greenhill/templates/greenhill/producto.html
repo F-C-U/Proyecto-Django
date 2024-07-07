@@ -8,31 +8,25 @@
   <!-- producto -->
 
   <div class="container">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>
-            <img class="mx-auto d-block" src="{{ producto.imagen.url }}" alt="" height="100" />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="text-center">{{ producto.precio }}</td>
-        </tr>
-        <tr>
-          <td class="text-center">Precio</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="row">
+      <div class="col">
+        <img src="{{ producto.imagen.url }}" class="img-fluid" alt="..." />
+      </div>
+      <div class="col">
+        <h1>{{ producto.nombre }}</h1>
+        <p>{{ producto.descripcion }}</p>
+        <p>Precio: ${{ producto.precio }}</p>
+        <p>Stock: {{ producto.stock }}</p>
+        <div class="container">
+          {% if producto.stock != 0 %}
+            <a class="btn bg-white text-black" href="{% url 'pago' %}">Comprar</a>
+            <a class="btn bg-white text-black float-end" href="{% url 'agregar-carrito' producto.id %}">Agregar al Carrito</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
   <!-- producto -->
-  <div class="container">
-    {% if producto.stock != 0 %}
-      <a class="btn bg-white text-black" href="{% url 'pago' %}">Comprar</a>
-      <a class="btn bg-white text-black float-end" href="{% url 'agregar-carrito' producto.id %}">Agregar al Carrito</a>
-    {% endif %}
-  </div>
 {% endblock %}
 {% block scripts %}
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
