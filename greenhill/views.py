@@ -89,10 +89,19 @@ def editarPerfil(request, id):
         and Persona.objects.filter(usuario=request.user).exists()
     ):
         persona = get_object_or_404(Persona, id=id)
-        data = {"form": PersonaForm(instance=persona)}
+        data = {"form": EditarPerfilForm(instance=persona)}
+        region = request.POST.get("region")
+        comuna = request.POST.get("comuna")
+        request.session["region"] = region
+        request.session["comuna"] = comuna
+        request.POST._mutable = True
+        request.POST["region"] = ""
+        request.POST["comuna"] = ""
         if request.method == "POST":
-            formulario = PersonaForm(data=request.POST, instance=persona)
+            formulario = EditarPerfilForm(data=request.POST, instance=persona)
             if formulario.is_valid():
+                formulario.instance.region = request.session.get("region")
+                formulario.instance.comuna = request.session.get("comuna")
                 formulario.save()
                 return redirect(to="perfil")
             data["form"] = formulario
@@ -110,15 +119,6 @@ def usuarios(request):
         usuarios = Persona.objects.all()
         datos = {"usuarios": usuarios}
         return render(request, "greenhill/admin-usuarios.html", datos)
-    else:
-        return redirect(to="index")
-
-
-def eliminarUsuario(request, id):
-    if request.user.is_authenticated and request.user.is_superuser:
-        usuario = get_object_or_404(Persona, id=id)
-        usuario.delete()
-        return redirect(to="usuarios")
     else:
         return redirect(to="index")
 
@@ -256,8 +256,8 @@ def pedido(request, id):
 
 
 def crearPedido(request):
-    carrito = get_object_or_404(Carrito, id=request.session.get("carrito_id"))
     persona = get_object_or_404(Persona, usuario=request.user)
+    carrito = get_object_or_404(Carrito, id=request.session.get("carrito_id"))
     if not CarritoItem.objects.filter(carrito=carrito).exists():
         return HttpResponse("No hay productos en el carrito", 400)
     total = sum(
@@ -293,3 +293,13 @@ def desbloquear_usuario(request, user_id):
     usuario.is_active = True
     usuario.save()
     return redirect("usuarios")
+
+def cambiar_contrasena(request):
+    if request.method == "POST":
+        form = CambiarContrasenaForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("index")
+    else:
+        form = CambiarContrasenaForm(request.user)
+    return render(request, "greenhill/cambiar-contrasena.html", {"form": form})

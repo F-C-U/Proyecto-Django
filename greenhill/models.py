@@ -55,7 +55,6 @@ class CarritoItem(models.Model):
 class Pedido(models.Model):
     carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE, default=None)
     fecha = models.DateField(auto_now_add=True)
-    total = models.IntegerField()
     estado = models.CharField(
         choices=[
             ("Pendiente", "Pendiente"),
