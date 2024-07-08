@@ -29,8 +29,8 @@ class PersonaForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["region"].choices = [("", "Seleccione una región")]
-        self.fields["comuna"].choices = [("", "Seleccione una comuna")]
+        self.fields["region"].choices = [("0", "Seleccione una región")]
+        self.fields["comuna"].choices = [("0", "Seleccione una comuna")]
 
 
 class RegistroForm(UserCreationForm):
@@ -55,5 +55,5 @@ class EditarPerfilForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["region"].choices = [("", "Seleccione una región")]
-        self.fields["comuna"].choices = [("", "Seleccione una comuna")]
+        self.fields["region"].choices = [("0", "Seleccione una región")]
+        self.fields["comuna"].choices = [("0", "Seleccione una comuna")]
