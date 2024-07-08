@@ -293,13 +293,3 @@ def desbloquear_usuario(request, user_id):
     usuario.is_active = True
     usuario.save()
     return redirect("usuarios")
-
-def cambiar_contrasena(request):
-    if request.method == "POST":
-        form = CambiarContrasenaForm(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("index")
-    else:
-        form = CambiarContrasenaForm(request.user)
-    return render(request, "greenhill/cambiar-contrasena.html", {"form": form})
