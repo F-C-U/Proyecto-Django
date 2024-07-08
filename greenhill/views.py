@@ -8,7 +8,9 @@ from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def index(request):
-    return render(request, "greenhill/index.html")
+    productos = Producto.objects.all()
+    datos = {"productos": productos}
+    return render(request, "greenhill/index.html", datos)
 
 
 def adminAgregar(request):

@@ -1,33 +1,38 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
+
 {% block imports %}
+  <!-- Link to Bootstrap CSS -->
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
-{% block contenido %}
-  <title>Producto</title>
-  <!-- producto -->
 
+{% block contenido %}
+  <title>{{ producto.nombre }}</title>
   <div class="container">
     <div class="row">
-      <div class="col">
-        <img src="{{ producto.imagen.url }}" class="img-fluid" alt="..." />
+      <div class="col-md-6">
+        <img src="{{ producto.imagen.url }}" class="img-fluid" alt="{{ producto.nombre }}" />
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <h1>{{ producto.nombre }}</h1>
         <p>{{ producto.descripcion }}</p>
         <p>Precio: ${{ producto.precio }}</p>
         <p>Stock: {{ producto.stock }}</p>
         <div class="container">
           {% if producto.stock != 0 %}
-            <a class="btn bg-white text-black" href="{% url 'pago' %}">Comprar</a>
-            <a class="btn bg-white text-black float-end" href="{% url 'agregar-carrito' producto.id %}">Agregar al Carrito</a>
+            <a class="btn btn-primary" href="{% url 'pago' %}">Comprar</a>
+            <a class="btn btn-secondary float-end" href="{% url 'agregar-carrito' producto.id %}">Agregar al Carrito</a>
+          {% else %}
+            <p class="text-danger">Producto agotado</p>
           {% endif %}
         </div>
       </div>
     </div>
   </div>
-  <!-- producto -->
+  <!-- /Producto -->
 {% endblock %}
+
 {% block scripts %}
+  <!-- Link to Bootstrap JS Bundle -->
   <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

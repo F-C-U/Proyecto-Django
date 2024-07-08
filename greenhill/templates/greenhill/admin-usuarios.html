@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
 {% block contenido %}
+  <title>Administracion de usuarios</title>
   <h1>Administracion de usuarios</h1>
   <div class="container">
     <div class="row flex-lg-nowrap">
@@ -39,10 +40,10 @@
                             <td class="text-nowrap align-middle">{{ u }}</td>
                             <td class="text-center align-middle">
                               <div class="btn-group align-top">
-                                {% if user.is_active %}
-                                  <a href="{% url 'bloquear-usuario' user.id %}" class="btn btn-danger">Bloquear</a>
+                                {% if u.usuario.is_active %}
+                                  <a href="{% url 'bloquear-usuario' u.usuario.id %}" class="btn btn-danger">Bloquear</a>
                                 {% else %}
-                                  <a href="{% url 'desbloquear-usuario' user.id %}" class="btn btn-success">Desbloquear</a>
+                                  <a href="{% url 'desbloquear-usuario' u.usuario.id %}" class="btn btn-success">Desbloquear</a>
                                 {% endif %}
                               </div>
                             </td>
