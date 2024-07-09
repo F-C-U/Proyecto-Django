@@ -1,53 +1,55 @@
 {% extends 'greenhill/base.html' %}
 {% load static %}
 {% block imports %}
-  <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
 {% block contenido %}
-  <title>Green Hill Zone</title>
+<title>Green Hill Zone</title>
 
-  <h1 class="text-center">Bienvenido a Green hill Zone tu portal de Videojuegos</h1>
+<h1 class="text-center">Bienvenido a Green hill Zone tu portal de Videojuegos</h1>
 
-  <!-- Carrusel -->
-  <div class="container-fluid bg-primary">
-    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        {% for c in carrusel %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <a href="{% url 'producto' c.id %}"><img src="{{ c.imagen.url }}" style="max-width:25%;" class="w-40 d-block mx-auto img-fluid" alt="{{ c.descripcion }}" /></a>
-          </div>
-        {% endfor %}
+<!-- Carrusel -->
+<div class="container-fluid bg-primary">
+  <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for c in carrusel %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <a href="{% url 'producto' c.id %}"><img src="{{ c.imagen.url }}" style="max-width:25%;"
+            class="w-40 d-block mx-auto img-fluid" alt="{{ c.descripcion }}" /></a>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      {% endfor %}
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <!-- Carrusel -->
-  <!-- Tabla de productos -->
-  <div class="row p-3">
-    {% for c in carrusel %}
-      <div class="col-md-4">
-        <a class="text-decoration-none" href="producto.html">
-          <div class="card mb-4 shadow-sm">
-            <img style="max-width:300px;" class="card-img-top mx-auto d-block" src="{{ c.imagen.url }}" alt="{{ c.nombre }}" />
-            <div class="card-body text-center">
-              <h5 class="card-title">{{ c.nombre }}</h5>
-              <p class="card-text">{{ c.precio }}</p>
-            </div>
-          </div>
-        </a>
+</div>
+<!-- Carrusel -->
+<!-- Tabla de productos -->
+<div class="row p-3">
+  {% for c in carrusel %}
+  <div class="col-md-4">
+    <a class="text-decoration-none" href="{% url 'producto' c.id %}">
+      <div class="card mb-4 shadow-sm">
+        <img style="max-width:300px;" class="card-img-top mx-auto d-block" src="{{ c.imagen.url }}"
+          alt="{{ c.nombre }}" />
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ c.nombre }}</h5>
+          <p class="card-text">{{ c.precio }}</p>
+        </div>
       </div>
-    {% endfor %}
+    </a>
   </div>
-  <!-- Tabla de productos -->
+  {% endfor %}
+</div>
+<!-- Tabla de productos -->
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}
