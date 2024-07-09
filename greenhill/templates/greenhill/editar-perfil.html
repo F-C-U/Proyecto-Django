@@ -6,16 +6,16 @@
   <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
 {% endblock %}
 {% block contenido %}
-  <title>Registrarse</title>
-  <h1 class="text-center mt-4">Registrarse</h1>
+  <title>Editar Perfil</title>
+  <h1 class="text-center mt-4">Editar Perfil</h1>
   <!-- Formulario registro -->
   <div class="row mt-3 animate__animated animate__fadeInUp">
     <div class="col-md p-md-2"></div>
     <div class="col-md p-md-8 m-s-3 bg-dark">
-      <form method="POST" enctype="multipart/form-data" id="formRegistro">
+      <form method="POST" enctype="multipart/form-data" id="formPerfil">
         {% csrf_token %}
         {{ form|crispy }}
-        <button class="btn btn-primary" type="submit">Rgistrarse</button>
+        <button class="btn btn-primary" type="submit">Guardar</button>
       </form>
     </div>
     <div class="col-md p-md-2"></div>
@@ -28,5 +28,5 @@
   <script src="{% static 'greenhill/js/jquery.validate.js' %}"></script>
   <script src="{% static 'greenhill/js/messages_es.js' %}"></script>
   <script src="{% static 'greenhill/js/si.js' %}"></script>
-  <script src="{% static 'greenhill/js/validacionesRegistro.js' %}"></script>
+  <script src="{% static 'greenhill/js/validacionPerfil.js' %}"></script>
 {% endblock %}

@@ -2,102 +2,108 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <!-- Bootstrap -->
     {% block imports %}
-
+      <link rel="stylesheet" href="{% static 'greenhill/css/bootstrap.min.css' %}" />
     {% endblock %}
     <!-- Bootstrap -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <header>
-    <nav class="navbar navbar-expand-sm text-light navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">Green Hill Zone</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" href="{% url 'index' %}" aria-current="page">
-                Inicio
-                <span class="visually-hidden">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="{% url 'catalogo' %}" aria-current="page">Catalogo</a>
-            </li>
-            {% if user.is_authenticated and user.is_staff %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administracion</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                  <a class="dropdown-item" href="{% url 'admin-productos' %}">Productos</a>
-                  <a class="dropdown-item" href="{% url 'admin-agregar' %}">Agregar producto</a>
-                  <a class="dropdown-item" href="{% url 'usuarios' %}">Usuarios</a>
-                  <a class="dropdown-item" href="{% url 'admin-pedidos' %}">Pedidos</a>
-                </div>
-              </li>
-            {% endif %}
-          </ul>
-          <form class="d-flex my-2 my-lg-0">
-            <input class="form-control me-sm-2 bg-primary" type="text" placeholder="Buscar" />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-          </form>
-        </div>
-      </div>
-      <nav class="navbar navbar-expand-sm text-light navbar-dark">
-        <div class="container">
-          <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-            {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'pedidos' %}">Mis compras</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'carrito' %}">Carrito</a>
-              </li>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-              <li class="nav-item">
-                <form action="{% url 'logout' %}" method="post">
-                  {% csrf_token %}
-                  <button class="nav-link" type="submit">Cerrar sesion</button>
-                </form>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'perfil' %}">Perfil</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'registro-usr' %}">Registrarse</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </nav>
-    </nav>
-  </header>
 
   <body>
-    {% block contenido %}
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">Green Hill Zone</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'index' %}" aria-current="page">
+                  Inicio
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a>
+              </li>
+              {% if user.is_authenticated and user.is_staff %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administración</a>
+                  <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                    <li>
+                      <a class="dropdown-item" href="{% url 'admin-productos' %}">Productos</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'admin-agregar' %}">Agregar producto</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'usuarios' %}">Usuarios</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'admin-pedidos' %}">Pedidos</a>
+                    </li>
+                  </ul>
+                </li>
+              {% endif %}
+            </ul>
+            <form class="d-flex ms-auto">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+            <ul class="navbar-nav ms-auto">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'pedidos' %}">Mis compras</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'carrito' %}">Carrito</a>
+                </li>
+                <li class="nav-item">
+                  <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="nav-link btn btn-link" type="submit">Cerrar sesión</button>
+                  </form>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'perfil' %}">Perfil</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'registro-usr' %}">Registrarse</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
+    <body>
+      {% block contenido %}
+
+      {% endblock %}
+    </body>
+
+    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
+      <div class="w3-xlarge w3-padding-32">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+      </div>
+    </footer>
+
+    {% block scripts %}
+      <script src="{% static 'greenhill/js/bootstrap.bundle.min.js' %}"></script>
     {% endblock %}
   </body>
-  <footer class="w3-container w3-padding-64 w3-center w3-opacity">
-    <div class="w3-xlarge w3-padding-32">
-      <i class="fa fa-facebook-official w3-hover-opacity"></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-    </div>
-  </footer>
-  {% block scripts %}
-
-  {% endblock %}
 </html>

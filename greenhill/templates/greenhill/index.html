@@ -12,15 +12,11 @@
   <div class="container-fluid bg-primary">
     <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{% static 'greenhill/img/placeholder.png' %}" class="w-40 d-block mx-auto img-fluid" alt="First slide" />
-        </div>
-        <div class="carousel-item">
-          <img src="{% static 'greenhill/img/placeholder.png' %}" class="w-40 d-block mx-auto img-fluid" alt="Second slide" />
-        </div>
-        <div class="carousel-item">
-          <img src="{% static 'greenhill/img/placeholder.png' %}" class="w-40 d-block mx-auto img-fluid" alt="Third slide" />
-        </div>
+        {% for c in carrusel %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <a href="{% url 'producto' c.id %}"><img src="{{ c.imagen.url }}" style="max-width:25%;" class="w-40 d-block mx-auto img-fluid" alt="{{ c.descripcion }}" /></a>
+          </div>
+        {% endfor %}
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,176 +31,19 @@
   <!-- Carrusel -->
   <!-- Tabla de productos -->
   <div class="row p-3">
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless rounded">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-flex" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-  </div>
-  <div class="row p-3">
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
-    <div class="col">
-      <a class="text-decoration-none" href="producto.html">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>
-                <img class="mx-auto d-block" src="{% static 'greenhill/img/placeholder.png' %}" alt="" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">Producto</td>
-            </tr>
-            <tr>
-              <td class="text-center">Precio</td>
-            </tr>
-          </tbody>
-        </table>
-      </a>
-    </div>
+    {% for c in carrusel %}
+      <div class="col-md-4">
+        <a class="text-decoration-none" href="producto.html">
+          <div class="card mb-4 shadow-sm">
+            <img style="max-width:300px;" class="card-img-top mx-auto d-block" src="{{ c.imagen.url }}" alt="{{ c.nombre }}" />
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ c.nombre }}</h5>
+              <p class="card-text">{{ c.precio }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
   </div>
   <!-- Tabla de productos -->
 {% endblock %}
