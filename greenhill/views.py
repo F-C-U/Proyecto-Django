@@ -1,15 +1,16 @@
-import re
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
 from .models import *
 from django.contrib.auth import authenticate, login
+import random
 
 
 # Create your views here.
 def index(request):
-    productos = Producto.objects.all()
-    datos = {"productos": productos}
+    productos = list(Producto.objects.all())
+    carrusel = random.sample(productos, 3) if len(productos) >= 3 else productos
+    datos = {"productos": productos, "carrusel": carrusel}
     return render(request, "greenhill/index.html", datos)
 
 
